@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity  {
 
-    private Button btn_camera, btn_message, btn_sns, btn_account, btn_home, btn_paint;
+    private ImageButton btn_camera, btn_text, btn_sns, btn_account, btn_home, btn_paint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
         btn_account = findViewById(R.id.btn_account);
-        btn_message = findViewById(R.id.btn_message);
+        btn_text = findViewById(R.id.btn_text);
         btn_sns = findViewById(R.id.btn_sns);
         btn_camera = findViewById(R.id.btn_camera);
         btn_home = findViewById(R.id.btn_home);

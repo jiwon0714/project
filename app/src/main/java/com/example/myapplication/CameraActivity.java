@@ -18,6 +18,7 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,9 +30,8 @@ import java.io.IOException;
 public class CameraActivity extends AppCompatActivity {
 
     // 레이아웃의 버튼과 이미지뷰를 연결할 변수 선언
-    private Button btn_picture;
+    private ImageButton btn_picture , btn_save;
     private ImageView imageView;
-    public Button btn_save;
 
     // 그림을 받아올 비트맵 변수를 선언
     private Bitmap bitmap =null;
