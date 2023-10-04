@@ -1,9 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SNSActivity">
+    tools:context=".MainActivity">
+    <ImageView
+        android:id="@+id/magnifier"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/magnifier"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="4dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="친구를 찾아보세요."
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/magnifier"
+        android:layout_toLeftOf="@id/home"
+        />
+    <ImageButton
+        android:id="@+id/home"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="#00000000"
+        android:scaleType="fitCenter"
+        android:src="@drawable/home"
+        android:layout_alignParentRight="true"
+        />
+    <ImageView
+        android:id="@+id/mainimage"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:src="@drawable/pinokio"
+        android:layout_below="@id/magnifier"
+        android:layout_centerHorizontal="true"
+        />
+    <LinearLayout
+        android:id="@+id/function_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mainimage"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/heart"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            android:src="@drawable/heart"
+            android:layout_marginLeft="5dp"/>
+        <ImageButton
+            android:id="@+id/chat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            android:src="@drawable/chat"/>
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/snsmain"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/function_nav"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="#CCCCCC"
+        android:gravity="center"
+        android:text="글" />
+    <LinearLayout
+        android:layout_below="@+id/snsmain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/chat2"
+            android:layout_marginLeft="5dp"
+            />
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            />
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            />
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="댓글"/>
+    </LinearLayout>
+</RelativeLayout>
