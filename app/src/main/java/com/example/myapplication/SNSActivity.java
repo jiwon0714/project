@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 public class SNSActivity extends AppCompatActivity {
 
-    private ImageButton home, heart, chat;
+    private ImageButton home, heart, chat, add;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +24,13 @@ public class SNSActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SNSActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SNSActivity.this, AddPhotoActivity.class);
                 startActivity(intent);
             }
         });

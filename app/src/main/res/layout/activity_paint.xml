@@ -43,12 +43,20 @@
 
         <ImageButton
             android:id="@+id/btnClear"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="15dp"
             android:background="#CCCCCC"
             android:scaleType="centerInside"
             android:src="@drawable/icon_clear" />
+        <ImageButton
+            android:id="@+id/painthome"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:background="#00000000"
+            android:scaleType="centerInside"
+            android:src="@drawable/home" />
     </LinearLayout>
 
     <LinearLayout

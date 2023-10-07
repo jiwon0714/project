@@ -6,21 +6,22 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/magnifier"
+        android:id="@+id/add"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/magnifier"
+        android:src="@drawable/add"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="친구를 찾아보세요."
+        android:hint="🔍검색"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@id/magnifier"
+        android:layout_toRightOf="@id/add"
         android:layout_toLeftOf="@id/home"
         />
     <ImageButton
@@ -28,6 +29,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="4dp"
+        android:layout_marginLeft="4dp"
         android:background="#00000000"
         android:scaleType="fitCenter"
         android:src="@drawable/home"
@@ -36,9 +38,9 @@
 
     <LinearLayout
         android:id="@+id/usernamebar"
-        android:layout_above="@+id/mainimage"
+        android:layout_marginTop="5dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/mag"
+        android:layout_below="@+id/add"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
@@ -58,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:src="@drawable/pinokio"
-        android:layout_below="@id/magnifier"
+        android:layout_below="@id/usernamebar"
         android:layout_centerHorizontal="true"
         />
     <LinearLayout
@@ -66,19 +68,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mainimage"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
         <ImageButton
             android:id="@+id/heart"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="#00000000"
             android:scaleType="fitCenter"
             android:src="@drawable/heart"
             android:layout_marginLeft="5dp"/>
         <ImageButton
             android:id="@+id/chat"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="#00000000"
             android:scaleType="fitCenter"
             android:src="@drawable/chat"/>
@@ -86,7 +89,7 @@
     <TextView
         android:id="@+id/favoritecounter"
         android:layout_below="@id/function_nav"
-        android:text="like 0"
+        android:text="좋아요 0개"
         android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -96,9 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_below="@id/favoritecounter"
-        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:background="#CCCCCC"
         android:gravity="center"

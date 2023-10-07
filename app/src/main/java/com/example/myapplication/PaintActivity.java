@@ -3,7 +3,9 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,7 +21,11 @@ import android.widget.RadioGroup;
 
 public class PaintActivity extends AppCompatActivity {
     private MyPaintView myView;
+
+
+
     int count = 0;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,14 @@ public class PaintActivity extends AppCompatActivity {
             public void onClick(View view) {
                 myView.mBitmap.eraseColor(Color.TRANSPARENT);
                 myView.invalidate();
+            }
+        });
+
+        ((ImageButton)findViewById(R.id.painthome)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PaintActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
