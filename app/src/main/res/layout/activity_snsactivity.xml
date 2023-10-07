@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <ImageView
         android:id="@+id/magnifier"
         android:layout_width="40dp"
@@ -32,10 +33,30 @@
         android:src="@drawable/home"
         android:layout_alignParentRight="true"
         />
+
+    <LinearLayout
+        android:id="@+id/usernamebar"
+        android:layout_above="@+id/mainimage"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/mag"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/img_profile"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="35dp"
+            android:layout_height="35dp"/>
+        <TextView
+            android:text="User name"
+            android:id="@+id/tv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/mainimage"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:src="@drawable/pinokio"
         android:layout_below="@id/magnifier"
         android:layout_centerHorizontal="true"
@@ -62,12 +83,19 @@
             android:scaleType="fitCenter"
             android:src="@drawable/chat"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/favoritecounter"
+        android:layout_below="@id/function_nav"
+        android:text="like 0"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/snsmain"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_below="@id/function_nav"
+        android:layout_below="@id/favoritecounter"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -103,4 +131,5 @@
             android:layout_height="wrap_content"
             android:text="댓글"/>
     </LinearLayout>
+
 </RelativeLayout>
