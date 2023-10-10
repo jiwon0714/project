@@ -2,47 +2,71 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText et_id, et_pass, et_name, et_age;
-    private Button btn_register;
+    TextView back;
+    EditText name,id,pw,repw,email,birthyear,birthmonth,birthday;
+    Button pwcheck, submit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //아이디 값 찾기
-        et_id = findViewById(R.id.et_id);
-        et_pass = findViewById(R.id.et_pass);
-        et_name = findViewById(R.id.et_name);
-        et_age = findViewById(R.id.et_age);
+        //뒤로 가기 버튼
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> onBackPressed() );
 
-        //회원가입 버튼 클릭 시 수행
-        btn_register = findViewById(R.id.btn_register);
-        btn_register.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                //EditText에 현재 입력된 값을 가져온다
-                String userID = et_id.getText().toString();
-                String userPass = et_pass.getText().toString();
-                String userName = et_name.getText().toString();
-                int userAge = Integer.parseInt(et_age.getText().toString());
-                //이 값을 데이터베이스에 연동 시키면 될듯??
-
-                //if~~~
+        name = findViewById(R.id.et_name);
+        id=findViewById(R.id.et_id);
+        pw=findViewById(R.id.et_pass);
+        repw=findViewById(R.id.et_repass);
+        email=findViewById(R.id.et_mail);
+        birthyear=findViewById(R.id.et_year);
+        birthmonth=findViewById(R.id.et_month);
+        birthday=findViewById(R.id.et_day);
 
 
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                Toast.makeText(getApplicationContext(),"회원가입이 완료되었습니다!", Toast.LENGTH_LONG).show();
+        int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
+        int newUiOptions = uiOptions;
+        boolean isImmersiveModeEnabled = ((uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) == uiOptions);
+        if (isImmersiveModeEnabled) {
+            Log.i("Is on?", "Turning immersive mode mode off. ");
+        } else {
+            Log.i("Is on?", "Turning immersive mode mode on.");
+        }
+        newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
+
+        //비밀번호 확인 버튼
+        pwcheck = findViewById(R.id.btn_passcheck);
+        pwcheck.setOnClickListener(v -> {
+            if(pw.getText().toString().equals(repw.getText().toString())){
+                pwcheck.setText("일치");
+            }else{
+                Toast.makeText(RegisterActivity.this, "비밀번호가 다릅니다.", Toast.LENGTH_LONG).show();
             }
         });
+
+        //회원가입 완료 버튼
+        submit = findViewById(R.id.btn_register);
+        submit.setOnClickListener(v -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            Toast.makeText(RegisterActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
+            startActivity(intent);
+        });
+
     }
 }

@@ -5,16 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/back"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/back"
-        android:layout_marginLeft="5dp"
+        android:scaleType="centerInside"
         android:layout_marginTop="4dp"
         android:layout_marginRight="4dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:background="@color/white"
         />
     <EditText
         android:layout_width="match_parent"
@@ -63,36 +64,7 @@
         android:layout_below="@id/usernamebar"
         android:layout_centerHorizontal="true"
         />
-<!--    <LinearLayout-->
-<!--        android:id="@+id/function_nav"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/mainimage"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:orientation="horizontal">-->
-<!--        <ImageButton-->
-<!--            android:id="@+id/heart"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:background="#00000000"-->
-<!--            android:scaleType="fitCenter"-->
-<!--            android:src="@drawable/heart"-->
-<!--            android:layout_marginLeft="5dp"/>-->
-<!--        <ImageButton-->
-<!--            android:id="@+id/chat"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:background="#00000000"-->
-<!--            android:scaleType="fitCenter"-->
-<!--            android:src="@drawable/chat"/>-->
-<!--    </LinearLayout>-->
-<!--    <TextView-->
-<!--        android:id="@+id/favoritecounter"-->
-<!--        android:layout_below="@id/function_nav"-->
-<!--        android:text="좋아요 0개"-->
-<!--        android:layout_marginLeft="5dp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"/>-->
+
 
     <EditText
         android:id="@+id/et_content"
@@ -104,40 +76,13 @@
         android:background="#CCCCCC"
         android:gravity="center"
         android:hint="글을 작성하세요." />
-<!--    <LinearLayout-->
-<!--        android:layout_below="@+id/snsmain"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-<!--        <ImageView-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:src="@drawable/chat2"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            />-->
-<!--        <TextView-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="이름"-->
-<!--            />-->
-<!--        <TextView-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text=" : "-->
-<!--            />-->
-<!--        <TextView-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="댓글"/>-->
-<!--    </LinearLayout>-->
+
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_content"
         android:layout_marginTop="5dp"
-        android:text="업로드">
-    </Button>
+        android:background="@color/green"
+        android:text="업로드"></Button>
 </RelativeLayout>
