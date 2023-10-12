@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.ImageButton;
 
 public class AddPhotoActivity extends AppCompatActivity {
 
-    ImageButton back;
+    ImageButton back,home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +33,16 @@ public class AddPhotoActivity extends AppCompatActivity {
         //뒤로 가기 버튼
         back = findViewById(R.id.back);
         back.setOnClickListener(v -> onBackPressed() );
+
+
+        home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddPhotoActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

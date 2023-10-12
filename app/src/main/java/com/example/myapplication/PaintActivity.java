@@ -11,7 +11,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.media.MediaScannerConnection;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,12 +22,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class PaintActivity extends AppCompatActivity {
     private MyPaintView myView;
-
-
-
     int count = 0;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -95,7 +102,102 @@ public class PaintActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ImageButton btnCapture = findViewById(R.id.btn_picsave);
+        btnCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                captureAndSaveImage();
+            }
+        });
     }
+
+
+    // 이미지를 캡처하고 저장하는 메서드
+//    private void captureAndSaveImage() {
+//        myView.setDrawingCacheEnabled(true);
+//        myView.buildDrawingCache();
+//        Bitmap captureView = myView.getDrawingCache();
+//
+//        try {
+//            // 디렉토리 생성
+//            File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyPaintImages");
+//            if (!directory.exists()) {
+//                if (directory.mkdirs()) {
+//                    // 디렉토리 생성 성공
+//                } else {
+//                    // 디렉토리 생성 실패
+//                    Log.e("Error", "Failed to create directory");
+//                    Toast.makeText(getApplicationContext(), "저장 공간 생성 실패", Toast.LENGTH_LONG).show();
+//
+//                    return;
+//                }
+//            }
+//
+//
+//            // 이미지 파일 이름을 타임스탬프로 지정
+//            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+//            String imageFileName = "IMG_" + timeStamp + ".png";
+//
+//            // 이미지 파일을 저장
+//            File imageFile = new File(directory, imageFileName);
+//            FileOutputStream fos = new FileOutputStream(imageFile);
+//            captureView.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//            fos.flush();
+//            fos.close();
+//
+//            // 미디어 스캔을 통해 갤러리에 이미지 추가
+//            MediaScannerConnection.scanFile(this, new String[]{imageFile.getPath()}, null, null);
+//
+//            Toast.makeText(getApplicationContext(), "그림이 갤러리에 저장되었습니다.", Toast.LENGTH_LONG).show();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Toast.makeText(getApplicationContext(), "Failed to save image", Toast.LENGTH_LONG).show();
+//        } finally {
+//            myView.destroyDrawingCache();
+//        }
+//    }
+
+    private void captureAndSaveImage() {
+        myView.setDrawingCacheEnabled(true);
+        myView.buildDrawingCache();
+        Bitmap captureView = myView.getDrawingCache();
+
+        if (captureView != null) {
+            try {
+                // 외부 저장소에 디렉토리 생성 (저장 경로를 변경하려면 수정하세요)
+                File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyPaintImages");
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+
+                // 이미지 파일 이름을 타임스탬프로 지정
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+                String imageFileName = "IMG_" + timeStamp + ".png";
+
+                // 이미지 파일을 저장
+                File imageFile = new File(directory, imageFileName);
+                FileOutputStream fos = new FileOutputStream(imageFile);
+                captureView.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.flush();
+                fos.close();
+
+                // 미디어 스캔을 통해 갤러리에 이미지 추가
+                MediaScannerConnection.scanFile(this, new String[]{imageFile.getPath()}, null, null);
+
+                Toast.makeText(getApplicationContext(), "그림이 갤러리에 저장되었습니다!", Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Failed to save image", Toast.LENGTH_LONG).show();
+            } finally {
+                myView.destroyDrawingCache();
+            }
+        } else {
+            // 캡처된 비트맵이 null일 경우에 대한 처리
+            Toast.makeText(getApplicationContext(), "Failed to capture image", Toast.LENGTH_LONG).show();
+        }
+    }
+
 
     private static class MyPaintView extends View {
         private Bitmap mBitmap;
@@ -110,6 +212,11 @@ public class PaintActivity extends AppCompatActivity {
             mPaint.setAntiAlias(true);
             mPaint.setStrokeWidth(10);
             mPaint.setStyle(Paint.Style.STROKE);
+
+            // 비트맵 초기화 및 배경 설정
+            mBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+            mCanvas = new Canvas(mBitmap);
+            mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR); // 투명 배경
         }
 
         @Override
@@ -121,6 +228,7 @@ public class PaintActivity extends AppCompatActivity {
 
         @Override
         protected void onDraw(Canvas canvas) {
+
             canvas.drawBitmap(mBitmap, 0, 0, null); //지금까지 그려진 내용
             canvas.drawPath(mPath, mPaint); //현재 그리고 있는 내용
         }

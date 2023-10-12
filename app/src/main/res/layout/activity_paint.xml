@@ -28,17 +28,17 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btnRed"
                 android:checked="true"
-                android:text="빨강"/>
+                android:text="빨"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnGreen"
-                android:text="초록"/>
+                android:text="초"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnBlue"
-                android:text="파랑"/>
+                android:text="파"/>
         </RadioGroup>
 
         <ImageButton
@@ -49,19 +49,32 @@
             android:background="#CCCCCC"
             android:scaleType="centerInside"
             android:src="@drawable/icon_clear" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/btn_picsave"
+            android:layout_marginLeft="15dp"
+            android:background="#00000000"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_save"/>
+
         <ImageButton
             android:id="@+id/painthome"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="15dp"
             android:background="#00000000"
             android:scaleType="centerInside"
             android:src="@drawable/home" />
+
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/paintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
 </LinearLayout>
+

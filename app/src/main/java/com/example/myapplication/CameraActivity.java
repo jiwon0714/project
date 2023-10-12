@@ -31,7 +31,7 @@ import java.io.IOException;
 public class CameraActivity extends AppCompatActivity {
 
     // 레이아웃의 버튼과 이미지뷰를 연결할 변수 선언
-    private ImageButton btn_picture , btn_save;
+    private ImageButton btn_picture , btn_save, home;
     private ImageView imageView;
 
     // 그림을 받아올 비트맵 변수를 선언
@@ -61,6 +61,17 @@ public class CameraActivity extends AppCompatActivity {
         newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
         newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
+
+        home = findViewById(R.id.home);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         btn_picture.setOnClickListener(new View.OnClickListener() {
