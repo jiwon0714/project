@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.sns;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,14 +8,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class AddPhotoActivity extends AppCompatActivity {
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.R;
 
-    ImageButton back,home;
+public class SNSActivity extends AppCompatActivity {
 
+    ImageButton home, heart, chat, add;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_photo);
+        setContentView(R.layout.activity_snsactivity);
+
+
+        home = findViewById(R.id.home);
+        heart = findViewById(R.id.heart);
+        chat = findViewById(R.id.chat);
+        add = findViewById(R.id.add);
+
 
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
         int newUiOptions = uiOptions;
@@ -30,19 +39,24 @@ public class AddPhotoActivity extends AppCompatActivity {
         newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
-        //뒤로 가기 버튼
-        back = findViewById(R.id.back);
-        back.setOnClickListener(v -> onBackPressed() );
-
-
-        home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddPhotoActivity.this, MainActivity.class);
+                Intent intent = new Intent(SNSActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SNSActivity.this, AddPhotoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
     }
 }

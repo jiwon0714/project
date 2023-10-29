@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.chat;
 
 public class FriendItem {
     String name;

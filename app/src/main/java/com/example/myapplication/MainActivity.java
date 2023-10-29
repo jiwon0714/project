@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.myapplication.chat.ChatListActivity;
+import com.example.myapplication.sns.SNSActivity;
+
 public class MainActivity extends AppCompatActivity  {
 
     private ImageButton btn_camera, btn_sns, btn_account, btn_paint, btn_chat;

@@ -20,15 +20,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ChatListActivity"
+            android:name=".chat.ChatListActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ChatActivity"
+            android:name=".chat.ChatActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AddPhotoActivity"
+            android:name=".sns.AddPhotoActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -40,7 +40,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SNSActivity"
+            android:name=".sns.SNSActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
