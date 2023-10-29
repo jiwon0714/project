@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity  {
 
-    private ImageButton btn_camera, btn_text, btn_sns, btn_account, btn_home, btn_paint;
+    private ImageButton btn_camera, btn_sns, btn_account, btn_paint, btn_chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +19,9 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
         btn_account = findViewById(R.id.btn_account);
-        btn_text = findViewById(R.id.btn_text);
+        btn_chat = findViewById(R.id.btn_chat);
         btn_sns = findViewById(R.id.btn_sns);
         btn_camera = findViewById(R.id.btn_camera);
-        btn_home = findViewById(R.id.btn_home);
         btn_paint = findViewById(R.id.btn_paint);
 
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
@@ -74,6 +73,14 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                 startActivity(intent);
             }
         });

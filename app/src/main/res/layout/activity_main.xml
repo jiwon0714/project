@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/background">
+    tools:context=".MainActivity">
 
 
     <TextView
@@ -55,7 +54,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:adjustViewBounds="true"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="@+id/btn_camera"
         app:layout_constraintStart_toStartOf="@+id/btn_camera"
@@ -89,7 +88,7 @@
         app:srcCompat="@drawable/icon_home" />
 
     <ImageButton
-        android:id="@+id/btn_text"
+        android:id="@+id/btn_chat"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
