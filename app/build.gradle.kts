@@ -29,6 +29,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+
 }
 
 dependencies {
@@ -40,6 +42,5 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation ("com.android.support:recyclerview-v7:33.0.0")
-    implementation ("androidx.recyclerview:recyclerview:1.1.0")   //androidx 버전
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
 }
