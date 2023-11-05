@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -13,8 +14,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,13 +29,18 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class PaintActivity extends AppCompatActivity {
     private MyPaintView myView;
+
     int count = 0;
+
+    private static final int REQUEST_IMAGE_PICK = 1;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,14 @@ public class PaintActivity extends AppCompatActivity {
         setContentView(R.layout.activity_paint);
         myView = new MyPaintView(this);
 
+        // "갤러리로 이동" 버튼 처리
+        ImageButton btnGallery = findViewById(R.id.btnGallery);
+        btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGallery();
+            }
+        });
 
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
         int newUiOptions = uiOptions;
@@ -110,53 +126,36 @@ public class PaintActivity extends AppCompatActivity {
                 captureAndSaveImage();
             }
         });
+
+
+
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_IMAGE_PICK);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
+            if (data != null) {
+                Uri selectedImage = data.getData();
+
+                try {
+                    Bitmap backgroundImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                    myView.setBackgroundImage(backgroundImage);
+                    Toast.makeText(this, "배경 이미지로 설정되었습니다.", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 
-    // 이미지를 캡처하고 저장하는 메서드
-//    private void captureAndSaveImage() {
-//        myView.setDrawingCacheEnabled(true);
-//        myView.buildDrawingCache();
-//        Bitmap captureView = myView.getDrawingCache();
-//
-//        try {
-//            // 디렉토리 생성
-//            File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyPaintImages");
-//            if (!directory.exists()) {
-//                if (directory.mkdirs()) {
-//                    // 디렉토리 생성 성공
-//                } else {
-//                    // 디렉토리 생성 실패
-//                    Log.e("Error", "Failed to create directory");
-//                    Toast.makeText(getApplicationContext(), "저장 공간 생성 실패", Toast.LENGTH_LONG).show();
-//
-//                    return;
-//                }
-//            }
-//
-//
-//            // 이미지 파일 이름을 타임스탬프로 지정
-//            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-//            String imageFileName = "IMG_" + timeStamp + ".png";
-//
-//            // 이미지 파일을 저장
-//            File imageFile = new File(directory, imageFileName);
-//            FileOutputStream fos = new FileOutputStream(imageFile);
-//            captureView.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//            fos.flush();
-//            fos.close();
-//
-//            // 미디어 스캔을 통해 갤러리에 이미지 추가
-//            MediaScannerConnection.scanFile(this, new String[]{imageFile.getPath()}, null, null);
-//
-//            Toast.makeText(getApplicationContext(), "그림이 갤러리에 저장되었습니다.", Toast.LENGTH_LONG).show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Toast.makeText(getApplicationContext(), "Failed to save image", Toast.LENGTH_LONG).show();
-//        } finally {
-//            myView.destroyDrawingCache();
-//        }
-//    }
 
     private void captureAndSaveImage() {
         myView.setDrawingCacheEnabled(true);
@@ -219,6 +218,10 @@ public class PaintActivity extends AppCompatActivity {
             mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR); // 투명 배경
         }
 
+        public void setBackgroundImage(Bitmap background) {
+            mCanvas.drawBitmap(background, 0, 0, null);
+            invalidate();
+        }
         @Override
         protected void onSizeChanged(int w, int h, int oldw, int oldh) {
             super.onSizeChanged(w, h, oldw, oldh);
@@ -254,5 +257,8 @@ public class PaintActivity extends AppCompatActivity {
             this.invalidate();
             return true;
         }
+
+
+
     }
 }
