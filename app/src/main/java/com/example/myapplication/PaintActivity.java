@@ -16,6 +16,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,7 +51,7 @@ public class PaintActivity extends AppCompatActivity {
 
     private int selectedColor; // 전역 변수로 선언
 
-    ImageButton palette;
+    ImageButton palette, btnThickness, btnEraser;
 
     int count = 0;
 
@@ -116,17 +118,18 @@ public class PaintActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btnThickness = findViewById(R.id.imageView_paintBrush_drawing);
+        btnThickness = findViewById(R.id.imageView_paintBrush_drawing);
         btnThickness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showThicknessDialog();
+                count = 1;
             }
         });
 
 
 
-        ImageButton btnEraser = findViewById(R.id.btn_eraser);
+        btnEraser = findViewById(R.id.btn_eraser);
         btnEraser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,8 +160,15 @@ public class PaintActivity extends AppCompatActivity {
                         // 선택한 색상을 그림의 색상으로 설정
                         selectedColor = color;
                         myView.mPaint.setColor(color);
+                        if(color != Color.BLACK)
+                            palette.setBackgroundColor(color); // 원하는 배경 색상으로 설정
+                        else
+                            palette.setBackgroundColor(Color.parseColor("#CCCCCC"));
+
+
                     }
                 })
+
                 .show();
     }
 
@@ -205,6 +215,10 @@ public class PaintActivity extends AppCompatActivity {
         // 지우개 모드로 설정 (선 색상을 배경색 또는 원하는 색으로 설정)
         myView.mPaint.setColor(Color.WHITE); // 여기에서는 흰색을 배경색으로 사용
         myView.mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+
+        btnThickness.setImageResource(R.drawable.brush);
+        btnEraser.setImageResource(R.drawable.eraser_toggle);
+
     }
 
     // 그리기 모드로 변경
@@ -212,6 +226,10 @@ public class PaintActivity extends AppCompatActivity {
         // 그리기 모드로 설정 (선 색상을 원하는 색상으로 설정)
         myView.mPaint.setColor(selectedColor);
         myView.mPaint.setXfermode(null);
+
+        btnThickness.setImageResource(R.drawable.brush_toggle);
+        btnEraser.setImageResource(R.drawable.eraser);
+
     }
 
 
@@ -248,10 +266,12 @@ public class PaintActivity extends AppCompatActivity {
                 // 사용자가 조절을 멈출 때 실행
             }
         });
-        enableDrawMode();
+        if(count != 0)
+            enableDrawMode();
         // 다이얼로그 표시
         builder.show();
     }
+
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, REQUEST_IMAGE_PICK);

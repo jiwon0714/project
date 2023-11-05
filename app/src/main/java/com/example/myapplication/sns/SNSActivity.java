@@ -17,7 +17,7 @@ public class SNSActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_snsactivity);
+        setContentView(R.layout.sns_activity_snsactivity);
 
 
         home = findViewById(R.id.home);

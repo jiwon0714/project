@@ -19,7 +19,7 @@
             android:contentDescription="@string/app_name"
             android:scaleType="centerInside"
             android:background="#CCCCCC"
-            android:src="@drawable/brush" />
+            android:src="@drawable/brush_toggle" />
 
         <ImageButton
             android:id="@+id/color"
