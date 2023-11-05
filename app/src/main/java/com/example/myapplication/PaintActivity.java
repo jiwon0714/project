@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import java.util.Locale;
 public class PaintActivity extends AppCompatActivity {
     private MyPaintView myView;
 
+    RadioGroup radioGroup;
     int count = 0;
 
     private static final int REQUEST_IMAGE_PICK = 1;
@@ -73,37 +75,39 @@ public class PaintActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
         ((LinearLayout) findViewById(R.id.paintLayout)).addView(myView);
-        ((RadioGroup)findViewById(R.id.radioGroup)).setOnCheckedChangeListener(
-                new RadioGroup.OnCheckedChangeListener() {
-                    @SuppressLint("NonConstantResourceId")
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                        if (checkedId == R.id.btnRed) {
-                            myView.mPaint.setColor(Color.RED);
-                        } else if (checkedId == R.id.btnGreen) {
-                            myView.mPaint.setColor(Color.GREEN);
-                        } else if (checkedId == R.id.btnBlue) {
-                            myView.mPaint.setColor(Color.BLUE);
-                        }
-                    }
 
-                });
 
-//        Button btnTh = findViewById(R.id.btnTh);
-//        btnTh.setOnClickListener((new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(count%2==1){
-//                    btnTh.setText("얇게");
-//                    myView.mPaint.setStrokeWidth(10);
-//                    count++;
-//                } else {
-//                    btnTh.setText("두껍게");
-//                    myView.mPaint.setStrokeWidth(20);
-//                    count++;
-//                }
-//            }
-//        }));
+        radioGroup = findViewById(R.id.radioGroup); // XML에서 라디오 그룹을 찾아서 전역 변수에 할당
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.btnRed) {
+                    myView.mPaint.setColor(Color.RED);
+                } else if (checkedId == R.id.btnGreen) {
+                    myView.mPaint.setColor(Color.GREEN);
+                } else if (checkedId == R.id.btnBlue) {
+                    myView.mPaint.setColor(Color.BLUE);
+                }
+            }
+        });
+//        ((RadioGroup)findViewById(R.id.radioGroup)).setOnCheckedChangeListener(
+//                new RadioGroup.OnCheckedChangeListener() {
+//                    @SuppressLint("NonConstantResourceId")
+//                    @Override
+//                    public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+//                        if (checkedId == R.id.btnRed) {
+//                            myView.mPaint.setColor(Color.RED);
+//                        } else if (checkedId == R.id.btnGreen) {
+//                            myView.mPaint.setColor(Color.GREEN);
+//                        } else if (checkedId == R.id.btnBlue) {
+//                            myView.mPaint.setColor(Color.BLUE);
+//                        }
+//                    }
+//
+//                });
+
 
         ((ImageButton)findViewById(R.id.btnClear)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +141,75 @@ public class PaintActivity extends AppCompatActivity {
             }
         });
 
+
+
+        ImageButton btnEraser = findViewById(R.id.btn_eraser);
+        btnEraser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEraserSizeDialog();
+            }
+        });
+
+
     }
+
+
+
+    private void showEraserSizeDialog() {
+        // 다이얼로그 레이아웃을 inflate
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_erase, null);
+
+        // SeekBar를 찾아옴
+        SeekBar eraserSeekBar = dialogView.findViewById(R.id.eraserseekBar);
+
+        // 초기 지우개 크기 설정
+        int initialEraserSize = (int) myView.mPaint.getStrokeWidth();
+        eraserSeekBar.setProgress(initialEraserSize);
+
+        // 다이얼로그 생성
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+
+        // 지우개 크기 조절 SeekBar의 값이 변경되었을 때 리스너 설정
+        eraserSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // SeekBar 값에 따라 그림판의 지우개 크기 변경 (선 굵기를 0으로 설정하면 지우개 역할 수행)
+                myView.mPaint.setStrokeWidth(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // 사용자가 조절을 시작할 때 실행
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // 사용자가 조절을 멈출 때 실행
+            }
+        });
+        enableEraserMode();
+        // 다이얼로그 표시
+        builder.show();
+    }
+
+    // 지우개 기능 추가
+    private void enableEraserMode() {
+        // 지우개 모드로 설정 (선 색상을 배경색 또는 원하는 색으로 설정)
+        myView.mPaint.setColor(Color.WHITE); // 여기에서는 흰색을 배경색으로 사용
+        myView.mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        radioGroup.clearCheck(); // 라디오 그룹 내에서 선택된 버튼을 해제합니다.
+    }
+
+    // 그리기 모드로 변경
+    private void enableDrawMode() {
+        // 그리기 모드로 설정 (선 색상을 원하는 색상으로 설정)
+        myView.mPaint.setColor(Color.BLACK); // 여기에서는 검정색을 사용
+        myView.mPaint.setXfermode(null);
+    }
+
+
     private void showThicknessDialog() {
         // 다이얼로그 레이아웃을 inflate
         View dialogView = getLayoutInflater().inflate(R.layout.dialog, null);
@@ -152,7 +224,6 @@ public class PaintActivity extends AppCompatActivity {
         // 다이얼로그 생성
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView);
-        builder.setTitle("굵기 조절");
 
         // 굵기 조절 SeekBar의 값이 변경되었을 때 리스너 설정
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -172,7 +243,7 @@ public class PaintActivity extends AppCompatActivity {
                 // 사용자가 조절을 멈출 때 실행
             }
         });
-
+        enableDrawMode();
         // 다이얼로그 표시
         builder.show();
     }

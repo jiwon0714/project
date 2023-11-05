@@ -53,13 +53,21 @@
         </RadioGroup>
 
         <ImageButton
+            android:id="@+id/btn_eraser"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="20dp"
+            android:background="#CCCCCC"
+            android:scaleType="centerInside"
+            android:src="@drawable/eraser" />
+        <ImageButton
             android:id="@+id/btnClear"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginLeft="20dp"
             android:background="#CCCCCC"
             android:scaleType="centerInside"
-            android:src="@drawable/icon_clear" />
+            android:src="@drawable/trashcan" />
 
         <ImageButton
             android:id="@+id/btnGallery"

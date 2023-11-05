@@ -5,5 +5,7 @@
     <color name="green">#186F65</color>
     <color name="transparent">#80000000</color>
     <color name="textView_app_color">#D81B60</color>
+    <color name="app_background">#EDEDF7</color>
+    <color name="colorPrimary">#D81B60</color>
 
 </resources>
