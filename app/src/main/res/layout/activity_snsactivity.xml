@@ -13,8 +13,8 @@
 
         <ImageButton
             android:id="@+id/add"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:scaleType="fitCenter"
             android:src="@drawable/add"
             android:background="#00000000"
@@ -25,16 +25,17 @@
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:layout_weight="1"
+            android:layout_marginTop="5dp"
             android:hint="🔍검색"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/add"
             android:layout_toLeftOf="@id/home" />
         <ImageButton
             android:id="@+id/home"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="4dp"
             android:background="#00000000"

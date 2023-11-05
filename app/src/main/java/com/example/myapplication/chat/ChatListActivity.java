@@ -19,7 +19,7 @@ public class ChatListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_list);
+        setContentView(R.layout.chat_activity_list);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 

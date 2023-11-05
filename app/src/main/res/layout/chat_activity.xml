@@ -125,5 +125,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date"
-        tools:listitem="@layout/list_talk_item_mine" />
+        tools:listitem="@layout/chat_list_talk_item_mine" />
 </androidx.constraintlayout.widget.ConstraintLayout>
