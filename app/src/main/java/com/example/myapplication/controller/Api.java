@@ -9,5 +9,7 @@ public interface Api {
     @GET("sample_post")
     Call<post> getData();
 
+    //@POST("upload_post")
+    
 }
 
