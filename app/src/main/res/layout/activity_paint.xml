@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/baseLayout"
     android:orientation="vertical">
 
@@ -11,12 +12,21 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnTh"
-            android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/imageView_paintBrush_drawing"
+            android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginLeft="5dp"
-            android:text="굵기"/>
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:background="#CCCCCC"
+            android:src="@drawable/brush" />
+
+<!--        <Button-->
+<!--            android:id="@+id/btnTh"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="55dp"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:text="굵기"/>-->
 
         <RadioGroup
             android:id="@+id/radioGroup"

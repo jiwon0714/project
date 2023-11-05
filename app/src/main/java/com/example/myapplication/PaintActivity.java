@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import java.io.File;
@@ -87,21 +89,21 @@ public class PaintActivity extends AppCompatActivity {
 
                 });
 
-        Button btnTh = findViewById(R.id.btnTh);
-        btnTh.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(count%2==1){
-                    btnTh.setText("얇게");
-                    myView.mPaint.setStrokeWidth(10);
-                    count++;
-                } else {
-                    btnTh.setText("두껍게");
-                    myView.mPaint.setStrokeWidth(20);
-                    count++;
-                }
-            }
-        }));
+//        Button btnTh = findViewById(R.id.btnTh);
+//        btnTh.setOnClickListener((new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(count%2==1){
+//                    btnTh.setText("얇게");
+//                    myView.mPaint.setStrokeWidth(10);
+//                    count++;
+//                } else {
+//                    btnTh.setText("두껍게");
+//                    myView.mPaint.setStrokeWidth(20);
+//                    count++;
+//                }
+//            }
+//        }));
 
         ((ImageButton)findViewById(R.id.btnClear)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,10 +129,53 @@ public class PaintActivity extends AppCompatActivity {
             }
         });
 
-
+        ImageButton btnThickness = findViewById(R.id.imageView_paintBrush_drawing);
+        btnThickness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showThicknessDialog();
+            }
+        });
 
     }
+    private void showThicknessDialog() {
+        // 다이얼로그 레이아웃을 inflate
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog, null);
 
+        // SeekBar를 찾아옴
+        SeekBar seekBar = dialogView.findViewById(R.id.seekBar);
+
+        // 초기 굵기 설정
+        int initialThickness = (int) myView.mPaint.getStrokeWidth();
+        seekBar.setProgress(initialThickness);
+
+        // 다이얼로그 생성
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder.setTitle("굵기 조절");
+
+        // 굵기 조절 SeekBar의 값이 변경되었을 때 리스너 설정
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // SeekBar 값에 따라 그림판의 선 굵기 변경
+                myView.mPaint.setStrokeWidth(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // 사용자가 조절을 시작할 때 실행
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // 사용자가 조절을 멈출 때 실행
+            }
+        });
+
+        // 다이얼로그 표시
+        builder.show();
+    }
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, REQUEST_IMAGE_PICK);

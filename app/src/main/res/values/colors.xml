@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#186F65</color>
     <color name="transparent">#80000000</color>
+    <color name="textView_app_color">#D81B60</color>
+
 </resources>
