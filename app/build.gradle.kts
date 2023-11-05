@@ -44,6 +44,5 @@ dependencies {
 
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
 
-    implementation ("com.jaredrummler:colorpicker:1.1.0")
-
+    implementation ("com.github.Dhaval2404:ColorPicker:2.3")
 }

@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -30,6 +31,12 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.github.dhaval2404.colorpicker.ColorPickerDialog;
+import com.github.dhaval2404.colorpicker.listener.ColorListener;
+import com.github.dhaval2404.colorpicker.model.ColorShape;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,7 +47,10 @@ import java.util.Locale;
 public class PaintActivity extends AppCompatActivity {
     private MyPaintView myView;
 
-    RadioGroup radioGroup;
+    private int selectedColor; // 전역 변수로 선언
+
+    ImageButton palette;
+
     int count = 0;
 
     private static final int REQUEST_IMAGE_PICK = 1;
@@ -77,43 +87,16 @@ public class PaintActivity extends AppCompatActivity {
         ((LinearLayout) findViewById(R.id.paintLayout)).addView(myView);
 
 
-        radioGroup = findViewById(R.id.radioGroup); // XML에서 라디오 그룹을 찾아서 전역 변수에 할당
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.btnRed) {
-                    myView.mPaint.setColor(Color.RED);
-                } else if (checkedId == R.id.btnGreen) {
-                    myView.mPaint.setColor(Color.GREEN);
-                } else if (checkedId == R.id.btnBlue) {
-                    myView.mPaint.setColor(Color.BLUE);
-                }
-            }
-        });
-//        ((RadioGroup)findViewById(R.id.radioGroup)).setOnCheckedChangeListener(
-//                new RadioGroup.OnCheckedChangeListener() {
-//                    @SuppressLint("NonConstantResourceId")
-//                    @Override
-//                    public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-//                        if (checkedId == R.id.btnRed) {
-//                            myView.mPaint.setColor(Color.RED);
-//                        } else if (checkedId == R.id.btnGreen) {
-//                            myView.mPaint.setColor(Color.GREEN);
-//                        } else if (checkedId == R.id.btnBlue) {
-//                            myView.mPaint.setColor(Color.BLUE);
-//                        }
-//                    }
-//
-//                });
 
 
         ((ImageButton)findViewById(R.id.btnClear)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                enableDrawMode();
                 myView.mBitmap.eraseColor(Color.TRANSPARENT);
                 myView.invalidate();
+
             }
         });
 
@@ -151,10 +134,33 @@ public class PaintActivity extends AppCompatActivity {
             }
         });
 
-
+        palette = findViewById(R.id.color);
+        palette.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showColorPickerDialog();
+            }
+        });
     }
 
-
+    @SuppressLint("ResourceType")
+    private void showColorPickerDialog() {
+        // Java Code
+        new ColorPickerDialog
+                .Builder(this)
+                .setTitle("팔레트")
+                .setColorShape(ColorShape.SQAURE)
+                .setDefaultColor(Color.BLACK)
+                .setColorListener(new ColorListener() {
+                    @Override
+                    public void onColorSelected(int color, @NotNull String colorHex) {
+                        // 선택한 색상을 그림의 색상으로 설정
+                        selectedColor = color;
+                        myView.mPaint.setColor(color);
+                    }
+                })
+                .show();
+    }
 
     private void showEraserSizeDialog() {
         // 다이얼로그 레이아웃을 inflate
@@ -199,13 +205,12 @@ public class PaintActivity extends AppCompatActivity {
         // 지우개 모드로 설정 (선 색상을 배경색 또는 원하는 색으로 설정)
         myView.mPaint.setColor(Color.WHITE); // 여기에서는 흰색을 배경색으로 사용
         myView.mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        radioGroup.clearCheck(); // 라디오 그룹 내에서 선택된 버튼을 해제합니다.
     }
 
     // 그리기 모드로 변경
     private void enableDrawMode() {
         // 그리기 모드로 설정 (선 색상을 원하는 색상으로 설정)
-        myView.mPaint.setColor(Color.BLACK); // 여기에서는 검정색을 사용
+        myView.mPaint.setColor(selectedColor);
         myView.mPaint.setXfermode(null);
     }
 
@@ -323,7 +328,7 @@ public class PaintActivity extends AppCompatActivity {
             super(context);
             mPath = new Path();
             mPaint = new Paint();
-            mPaint.setColor(Color.RED);
+            mPaint.setColor(Color.BLACK);
             mPaint.setAntiAlias(true);
             mPaint.setStrokeWidth(10);
             mPaint.setStyle(Paint.Style.STROKE);

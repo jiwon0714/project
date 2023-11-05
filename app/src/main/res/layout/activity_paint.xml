@@ -21,36 +21,19 @@
             android:background="#CCCCCC"
             android:src="@drawable/brush" />
 
-<!--        <Button-->
-<!--            android:id="@+id/btnTh"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="55dp"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            android:text="굵기"/>-->
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/color"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/app_name"
             android:layout_marginLeft="20dp"
-            android:orientation="horizontal">
-            <RadioButton
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:id="@+id/btnRed"
-                android:checked="true"
-                android:text="빨"/>
-            <RadioButton
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:id="@+id/btnGreen"
-                android:text="초"/>
-            <RadioButton
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:id="@+id/btnBlue"
-                android:text="파"/>
-        </RadioGroup>
+            android:scaleType="centerInside"
+            android:background="#CCCCCC"
+            android:src="@drawable/color" />
+
+
+
+
 
         <ImageButton
             android:id="@+id/btn_eraser"
