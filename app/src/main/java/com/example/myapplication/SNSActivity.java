@@ -21,7 +21,7 @@ import android.util.Base64;
 
 public class SNSActivity extends AppCompatActivity {
 
-    private Api api;
+    public static Api api;
     ImageButton home, heart, chat, add;
     TextView text, like;
     ImageView img;
@@ -40,7 +40,8 @@ public class SNSActivity extends AppCompatActivity {
         img = findViewById(R.id.mainimage);
         like = findViewById(R.id.favoritecounter);
 
-        api = set_retrofit.getClient().create(Api.class);
+        RetrofitClient retrofitClient = RetrofitClient.getInstance();
+        api = retrofitClient.getUserRetrofitInterface();
         Call<post> call = api.getData();
         call.enqueue(new Callback<post>() {
             @Override

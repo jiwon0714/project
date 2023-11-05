@@ -1,7 +1,7 @@
 package com.example.myapplication.dto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class    post {
+public class    ImageDTO {
 
     @Expose
     @SerializedName("post_id")
@@ -22,6 +22,13 @@ public class    post {
     @Expose
     @SerializedName("like")
     private int like;
+
+    public ImageDTO(){}
+
+    public ImageDTO(String img, String text){
+        this.img = img;
+        this.text = text;
+    }
 
     public int get_id() { return id; }
     public String get_user() { return post_oner; }
