@@ -1,6 +1,8 @@
 package com.example.myapplication.sns;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,28 +10,26 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.example.myapplication.AccountActivity;
-import com.example.myapplication.CameraActivity;
-import com.example.myapplication.Diary.DiaryListActivity;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.Navi;
-import com.example.myapplication.PaintActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.chat.ChatListActivity;
 
-public class SNSActivity extends AppCompatActivity {
+
+import java.util.ArrayList;
+
+public class SnsListActivity extends AppCompatActivity {
 
     ImageButton home, heart, chat, add;
-    ImageButton btn_camera, btn_sns, btn_home, btn_paint, btn_chat, btn_diary;
+    private ImageButton btn_camera, btn_sns, btn_home, btn_paint, btn_chat, btn_diary;
+
+    private RecyclerView mRecyclerView;
+    private SnsRecyclerAdapter mRecyclerAdapter;
+    private ArrayList<SnsItem> mSnsItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sns_activity_snsactivity);
+        setContentView(R.layout.sns_activity_sns_list);
 
-        heart = findViewById(R.id.heart);
-        chat = findViewById(R.id.chat);
-        add = findViewById(R.id.add);
 
 
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
@@ -46,10 +46,12 @@ public class SNSActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
 
+        add = findViewById(R.id.add);
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SNSActivity.this, AddPhotoActivity.class);
+                Intent intent = new Intent(SnsListActivity.this, AddPhotoActivity.class);
                 startActivity(intent);
             }
         });
@@ -67,6 +69,23 @@ public class SNSActivity extends AppCompatActivity {
 
 
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        /* initiate adapter */
+        mRecyclerAdapter = new SnsRecyclerAdapter();
+
+        /* initiate recyclerview */
+        mRecyclerView.setAdapter(mRecyclerAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,false));
+
+
+        /* adapt data */
+        mSnsItems = new ArrayList<>();
+        for(int i=1;i<=4;i++){
+            mSnsItems.add(new SnsItem(R.drawable.pinokio_circle, i+"번째 사람", R.drawable.pinokio_circle,i+"번째 글",i+"번째 댓글 단 사람", i+"번째 댓글"));
+        }
+        mRecyclerAdapter.setSnsList(mSnsItems);
 
 
     }

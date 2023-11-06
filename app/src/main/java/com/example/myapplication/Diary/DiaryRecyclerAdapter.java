@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.chat.FriendItem;
-import com.example.myapplication.chat.MyRecyclerAdapter;
 
 import java.util.ArrayList;
 
@@ -41,22 +39,22 @@ public class DiaryRecyclerAdapter extends RecyclerView.Adapter<DiaryRecyclerAdap
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView profile;
+        ImageView image;
         TextView title;
-        TextView message;
+        TextView date;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            profile = (ImageView) itemView.findViewById(R.id.profile);
+            image = (ImageView) itemView.findViewById(R.id.profile);
             title = (TextView) itemView.findViewById(R.id.title);
-            message = (TextView) itemView.findViewById(R.id.message);
+            date = (TextView) itemView.findViewById(R.id.date);
         }
 
         void onBind(DiaryItem item){
-            profile.setImageResource(item.getResourceId());
+            image.setImageResource(item.getResourceId());
             title.setText(item.getTitle());
-            message.setText(item.getMessage());
+            date.setText(item.getMessage());
         }
     }
 }

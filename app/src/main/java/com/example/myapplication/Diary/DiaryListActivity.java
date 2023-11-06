@@ -12,15 +12,15 @@ import android.widget.ImageButton;
 import com.example.myapplication.Navi;
 import com.example.myapplication.R;
 import com.example.myapplication.chat.FriendItem;
-import com.example.myapplication.chat.MyRecyclerAdapter;
+import com.example.myapplication.chat.ChatRecyclerAdapter;
 
 import java.util.ArrayList;
 
 public class DiaryListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private MyRecyclerAdapter mRecyclerAdapter;
-    private ArrayList<FriendItem> mDiaryItems;
+    private DiaryRecyclerAdapter mRecyclerAdapter;
+    private ArrayList<DiaryItem> mDiaryItems;
 
     private ImageButton btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary;
 
@@ -49,7 +49,7 @@ public class DiaryListActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         /* initiate adapter */
-        mRecyclerAdapter = new MyRecyclerAdapter();
+        mRecyclerAdapter = new DiaryRecyclerAdapter();
 
         /* initiate recyclerview */
         mRecyclerView.setAdapter(mRecyclerAdapter);
@@ -73,8 +73,8 @@ public class DiaryListActivity extends AppCompatActivity {
         /* adapt data */
         mDiaryItems = new ArrayList<>();
         for(int i=1;i<=10;i++){
-            mDiaryItems.add(new FriendItem(R.drawable.pinokio_circle,i+"번째 메모","2023-11-06"));
+            mDiaryItems.add(new DiaryItem(R.drawable.pinokio_circle,i+"번째 메모","2023-11-06"));
         }
-        mRecyclerAdapter.setFriendList(mDiaryItems);
+        mRecyclerAdapter.setDiaryList(mDiaryItems);
     }
 }

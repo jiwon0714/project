@@ -3,12 +3,11 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.myapplication.Diary.DiaryListActivity;
 import com.example.myapplication.chat.ChatListActivity;
-import com.example.myapplication.sns.SNSActivity;
+import com.example.myapplication.sns.SnsListActivity;
 
 public class Navi {
 
@@ -32,7 +31,7 @@ public class Navi {
         btn_sns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, SNSActivity.class);
+                Intent intent = new Intent(context, SnsListActivity.class);
                 context.startActivity(intent);
             }
         });

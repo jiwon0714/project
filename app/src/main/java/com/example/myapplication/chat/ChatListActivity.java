@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ChatListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private MyRecyclerAdapter mRecyclerAdapter;
+    private ChatRecyclerAdapter mRecyclerAdapter;
     private ArrayList<FriendItem> mfriendItems;
 
     private ImageButton btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary;
@@ -55,7 +55,7 @@ public class ChatListActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         /* initiate adapter */
-        mRecyclerAdapter = new MyRecyclerAdapter();
+        mRecyclerAdapter = new ChatRecyclerAdapter();
 
         /* initiate recyclerview */
         mRecyclerView.setAdapter(mRecyclerAdapter);

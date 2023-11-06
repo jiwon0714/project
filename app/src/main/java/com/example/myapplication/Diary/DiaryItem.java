@@ -11,9 +11,7 @@ public class DiaryItem {
         this.resourceId = resourceId;
     }
 
-    public int getResourceId() {
-        return resourceId;
-    }
+    public int getResourceId() {return resourceId;}
 
     public String getMessage() {
         return message;
@@ -31,7 +29,6 @@ public class DiaryItem {
         this.title = title;
     }
 
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
+    public void setResourceId(int resourceId) {this.resourceId = resourceId;
     }
 }

@@ -2,15 +2,10 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-
-import com.example.myapplication.Diary.DiaryListActivity;
-import com.example.myapplication.chat.ChatListActivity;
-import com.example.myapplication.sns.SNSActivity;
 
 public class MainActivity extends AppCompatActivity {
 
