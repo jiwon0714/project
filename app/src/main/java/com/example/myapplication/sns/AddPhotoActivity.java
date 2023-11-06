@@ -9,11 +9,15 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.myapplication.MainActivity;
+import com.example.myapplication.Navi;
 import com.example.myapplication.R;
 
 public class AddPhotoActivity extends AppCompatActivity {
 
-    ImageButton back,home;
+    ImageButton back;
+
+
+    ImageButton btn_camera, btn_sns, btn_home, btn_paint, btn_chat, btn_diary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +42,17 @@ public class AddPhotoActivity extends AppCompatActivity {
         back.setOnClickListener(v -> onBackPressed() );
 
 
-        home = findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddPhotoActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+
+        btn_home = findViewById(R.id.btn_home);
+        btn_chat = findViewById(R.id.btn_chat);
+        btn_sns = findViewById(R.id.btn_sns);
+        btn_camera = findViewById(R.id.btn_camera);
+        btn_paint = findViewById(R.id.btn_paint);
+        btn_diary = findViewById(R.id.btn_diary);
+
+        Navi navi = new Navi(this); // 'this'는 현재 액티비티의 Context를 나타냅니다.
+        navi.setImageButtonListeners(btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary);
+
 
     }
 }

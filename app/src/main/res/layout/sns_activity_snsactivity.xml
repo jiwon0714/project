@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -153,5 +154,74 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="#000000"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_home"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:background="#000000"
+            app:srcCompat="@drawable/icon_home" />
+
+        <ImageButton
+            android:id="@+id/btn_camera"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="20dp"
+            android:background="#000000"
+            app:srcCompat="@drawable/icon_camera" />
+
+        <ImageButton
+            android:id="@+id/btn_sns"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:background="#000000"
+            app:srcCompat="@drawable/p_color" />
+
+        <ImageButton
+            android:id="@+id/btn_paint"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:background="#000000"
+            app:srcCompat="@drawable/icon_paint" />
+
+        <ImageButton
+            android:id="@+id/btn_chat"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:background="#000000"
+            android:layout_marginLeft="20dp"
+            app:srcCompat="@drawable/chat_color" />
+
+        <ImageButton
+            android:id="@+id/btn_diary"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:background="#000000"
+            android:layout_marginLeft="20dp"
+            app:srcCompat="@drawable/diary_color" />
+    </LinearLayout>
 
 </RelativeLayout>

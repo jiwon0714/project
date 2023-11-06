@@ -30,8 +30,10 @@ import java.io.IOException;
 public class CameraActivity extends AppCompatActivity {
 
     // 레이아웃의 버튼과 이미지뷰를 연결할 변수 선언
-    private ImageButton btn_picture , btn_save, home;
+    private ImageButton btn_picture , btn_save;
     private ImageView imageView;
+
+    private ImageButton btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary;
 
     // 그림을 받아올 비트맵 변수를 선언
     private Bitmap bitmap =null;
@@ -61,15 +63,15 @@ public class CameraActivity extends AppCompatActivity {
         newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
-        home = findViewById(R.id.home);
+        btn_home = findViewById(R.id.btn_home);
+        btn_chat = findViewById(R.id.btn_chat);
+        btn_sns = findViewById(R.id.btn_sns);
+        btn_camera = findViewById(R.id.btn_camera);
+        btn_paint = findViewById(R.id.btn_paint);
+        btn_diary = findViewById(R.id.btn_diary);
 
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CameraActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        Navi navi = new Navi(this); // 'this'는 현재 액티비티의 Context를 나타냅니다.
+        navi.setImageButtonListeners(btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary);
 
 
 
@@ -90,6 +92,8 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     ActivityResultLauncher<Intent> camera_app =
             registerForActivityResult(

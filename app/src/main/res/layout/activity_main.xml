@@ -15,7 +15,7 @@
         android:background="@color/white"
         android:layout_marginBottom="25dp"
         android:scaleType="centerInside"
-        android:src="@drawable/pinokio" />
+        android:src="@drawable/pinokio_circle" />
 
     <TextView
         android:id="@+id/tv_name"

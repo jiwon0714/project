@@ -287,7 +287,14 @@ public class PaintActivity extends AppCompatActivity {
 
                 try {
                     Bitmap backgroundImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                    myView.setBackgroundImage(backgroundImage);
+
+                    int viewWidth = myView.getWidth();  // myView의 너비
+                    int viewHeight = myView.getHeight();  // myView의 높이
+
+                    // 이미지를 myView의 크기에 맞게 조절
+                    Bitmap scaledImage = Bitmap.createScaledBitmap(backgroundImage, viewWidth, viewHeight, false);
+
+                    myView.setBackgroundImage(scaledImage);
                     Toast.makeText(this, "배경 이미지로 설정되었습니다.", Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -295,6 +302,7 @@ public class PaintActivity extends AppCompatActivity {
             }
         }
     }
+
 
 
 

@@ -14,9 +14,9 @@
         <!--프로필 사진-->
         <ImageView
             android:id="@+id/profile"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/pinokio"/>
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:src="@drawable/pinokio_circle"/>
 
         <!--이름-->
         <TextView
