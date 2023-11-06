@@ -14,6 +14,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.provider.MediaStore;
@@ -21,12 +22,26 @@ import android.provider.MediaStore;
 import java.io.ByteArrayOutputStream;
 
 import com.example.myapplication.controller.Api;
+import com.example.myapplication.dto.post;
+import com.example.myapplication.dto.post_upload;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AddPhotoActivity extends AppCompatActivity {
 
     ImageButton back,home;
     ImageView select;
     Button btn_up;
+    EditText text;
     private ActivityResultLauncher<Intent> imagePickerLauncher;
+    private Api api;
+    private post_upload new_post = new post_upload();
+
+    public AddPhotoActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +64,6 @@ public class AddPhotoActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         back.setOnClickListener(v -> onBackPressed() );
 
-
         home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +75,7 @@ public class AddPhotoActivity extends AppCompatActivity {
 
         select = findViewById(R.id.mainimage);
         btn_up = findViewById(R.id.btn_upload);
+        text = findViewById(R.id.et_content);
         imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -71,6 +86,7 @@ public class AddPhotoActivity extends AppCompatActivity {
                         try {
                             Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri));
                             String encodedImage = bitmap_to_base64(bitmap);
+                            new_post.setImg(encodedImage);
                             Log.d("Base64 Image", encodedImage);
                             select.setImageBitmap(bitmap);
                         }
@@ -93,7 +109,26 @@ public class AddPhotoActivity extends AppCompatActivity {
         btn_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new_post.setTxt(text.getText().toString());
+                api = set_retrofit.getClient().create(Api.class);
+                Call<post_upload> call = api.postData(new_post);
 
+                call.enqueue(new Callback<post_upload>() {
+                    @Override
+                    public void onResponse(Call<post_upload> call, Response<post_upload> response) {
+                        if (response.isSuccessful()) {
+                            // Handle the successful response here
+                            return;
+                        } else {
+                            // Handle error response
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<post_upload> call, Throwable t) {
+                        // Handle fail response
+                    }
+                });
             }
         });
 
