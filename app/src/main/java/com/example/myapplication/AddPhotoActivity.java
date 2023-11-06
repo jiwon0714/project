@@ -117,16 +117,19 @@ public class AddPhotoActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<post_upload> call, Response<post_upload> response) {
                         if (response.isSuccessful()) {
-                            // Handle the successful response here
-                            return;
+                            String code = response.code() + "";
+                            Log.w("Code_1", code);
                         } else {
                             // Handle error response
+                            String code = response.code() + "";
+                            Log.w("Code_2", code);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<post_upload> call, Throwable t) {
                         // Handle fail response
+                        Log.w("Code_3", t.getMessage());
                     }
                 });
             }
