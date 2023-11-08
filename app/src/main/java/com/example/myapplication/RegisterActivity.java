@@ -6,15 +6,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 public class RegisterActivity extends AppCompatActivity {
 
     TextView back;
-    EditText name,id,pw,repw,email,birthyear,birthmonth,birthday;
+    EditText name,id,pw,repw,email,et_birthday;
     Button pwcheck, submit;
 
 
@@ -32,9 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         pw=findViewById(R.id.et_pass);
         repw=findViewById(R.id.et_repass);
         email=findViewById(R.id.et_mail);
-        birthyear=findViewById(R.id.et_year);
-        birthmonth=findViewById(R.id.et_month);
-        birthday=findViewById(R.id.et_day);
+
 
 
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
@@ -56,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
             if(pw.getText().toString().equals(repw.getText().toString())){
                 pwcheck.setText("일치");
             }else{
+                pwcheck.setText("재확인");
                 Toast.makeText(RegisterActivity.this, "비밀번호가 다릅니다.", Toast.LENGTH_LONG).show();
             }
         });
@@ -66,6 +67,15 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             Toast.makeText(RegisterActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
             startActivity(intent);
+        });
+
+        ImageButton birth = findViewById(R.id.btn_calendar);
+        birth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment dialogFragment = new DatePickerFragment();
+                dialogFragment.show(getSupportFragmentManager(), "datePicker");
+            }
         });
 
     }

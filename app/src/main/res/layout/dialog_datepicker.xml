@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <NumberPicker
+        android:id="@+id/yearpicker_datepicker"
+        android:layout_width="115dp"
+        android:layout_height="124dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.NumberPicker"/>
+
+    <NumberPicker
+        android:id="@+id/monthpicker_datepicker"
+        android:layout_width="115dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="50dp"
+        app:layout_constraintStart_toEndOf="@+id/yearpicker_datepicker"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.NumberPicker"
+        android:descendantFocusability="blocksDescendants"/>
+    <NumberPicker
+        android:id="@+id/datepicker_datepicker"
+        android:layout_width="115dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="50dp"
+        app:layout_constraintStart_toEndOf="@+id/monthpicker_datepicker"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.NumberPicker"
+        android:descendantFocusability="blocksDescendants"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel_button_datepicker"
+        android:layout_width="223dp"
+        android:layout_height="48dp"
+        android:text="취소"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yearpicker_datepicker"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@drawable/stroke"
+        android:descendantFocusability="blocksDescendants"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_button"
+        android:layout_width="223dp"
+        android:layout_height="48dp"
+        android:background="@color/green"
+        android:text="확인"
+        app:layout_constraintStart_toEndOf="@+id/cancel_button_datepicker"
+        app:layout_constraintTop_toTopOf="@+id/cancel_button_datepicker"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</androidx.constraintlayout.widget.ConstraintLayout>
