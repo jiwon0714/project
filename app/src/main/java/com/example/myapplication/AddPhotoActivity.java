@@ -20,11 +20,12 @@ import android.widget.ImageView;
 import android.provider.MediaStore;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import com.example.myapplication.controller.Api;
-import com.example.myapplication.dto.post;
-import com.example.myapplication.dto.post_upload;
+import com.example.myapplication.dto.ImageDTO;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,7 +38,7 @@ public class AddPhotoActivity extends AppCompatActivity {
     EditText text;
     private ActivityResultLauncher<Intent> imagePickerLauncher;
     private Api api;
-    private post_upload new_post = new post_upload();
+    private ImageDTO imageDTO = new ImageDTO();
 
     public AddPhotoActivity() {
     }
@@ -86,7 +87,8 @@ public class AddPhotoActivity extends AppCompatActivity {
                         try {
                             Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri));
                             String encodedImage = bitmap_to_base64(bitmap);
-                            new_post.setImg(encodedImage);
+                            // new_post.setImg(encodedImage);
+                            imageDTO.setImg(encodedImage);
                             Log.d("Base64 Image", encodedImage);
                             select.setImageBitmap(bitmap);
                         }
@@ -109,27 +111,26 @@ public class AddPhotoActivity extends AppCompatActivity {
         btn_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new_post.setTxt(text.getText().toString());
+                imageDTO.setTxt(text.getText().toString());
                 api = set_retrofit.getClient().create(Api.class);
-                Call<post_upload> call = api.postData(new_post);
+                Call<ResponseBody> call = api.postImage(imageDTO);
 
-                call.enqueue(new Callback<post_upload>() {
+                call.clone().enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<post_upload> call, Response<post_upload> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
-                            String code = response.code() + "";
-                            Log.w("Code_1", code);
-                        } else {
-                            // Handle error response
-                            String code = response.code() + "";
-                            Log.w("Code_2", code);
+                            // 서버 응답을 받았을 때 데이터를 로그로 확인
+                            try {
+                                Log.e("Response Data", response.body().string());
+                            } catch (IOException e) {
+                                Log.e("POST", "응답 데이터 읽기 실패");
+                            }
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<post_upload> call, Throwable t) {
-                        // Handle fail response
-                        Log.w("Code_3", t.getMessage());
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("POST", "실패");
                     }
                 });
             }
