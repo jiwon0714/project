@@ -57,10 +57,10 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/mainimage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="450dp"
         android:src="@drawable/pinokio"
         android:layout_below="@id/usernamebar"
         android:layout_centerHorizontal="true"

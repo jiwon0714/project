@@ -28,7 +28,7 @@
         <ImageView
             android:id="@+id/main_image"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="450dp"
             android:src="@drawable/pinokio"
             android:layout_below="@id/usernamebar"
             android:layout_centerHorizontal="true"
