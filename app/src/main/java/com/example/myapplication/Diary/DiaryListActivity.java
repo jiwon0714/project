@@ -4,15 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.myapplication.Diary_Calender.DiaryActivity;
 import com.example.myapplication.Navi;
 import com.example.myapplication.R;
-import com.example.myapplication.chat.FriendItem;
-import com.example.myapplication.chat.ChatRecyclerAdapter;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class DiaryListActivity extends AppCompatActivity {
     private DiaryRecyclerAdapter mRecyclerAdapter;
     private ArrayList<DiaryItem> mDiaryItems;
 
-    private ImageButton btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary;
+    private ImageButton btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary, add;
 
 
     @Override
@@ -66,7 +66,15 @@ public class DiaryListActivity extends AppCompatActivity {
         Navi navi = new Navi(this); // 'this'는 현재 액티비티의 Context를 나타냅니다.
         navi.setImageButtonListeners(btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary);
 
+        add = findViewById(R.id.add);
 
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DiaryListActivity.this, DiaryActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

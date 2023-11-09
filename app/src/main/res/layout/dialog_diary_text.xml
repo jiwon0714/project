@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="date"
+        android:textSize="50dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#FFFFFFFF"
+        android:src="@drawable/back"
+        android:scaleType="centerInside"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/date"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp" />
+
+    <!--구분선-->
+    <View
+        android:id="@+id/bar"
+        android:layout_width="130dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/date"
+        android:layout_centerInParent="true"
+        android:background="#aaa"/>
+
+    <EditText
+        android:layout_below="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="35dp"
+        android:text="dddddddd"
+        />
+
+</RelativeLayout>
