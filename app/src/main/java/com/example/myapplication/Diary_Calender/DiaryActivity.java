@@ -2,10 +2,13 @@ package com.example.myapplication.Diary_Calender;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +26,9 @@ public class DiaryActivity extends AppCompatActivity {
     ImageView image;
 
     TextView selected_date;
+
+    TextView diary_text;
+
     private ImageButton btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary;
 
     @Override
@@ -94,6 +100,40 @@ public class DiaryActivity extends AppCompatActivity {
                         //calendar.setVisibility(View.GONE);
                     }
                 });
+            }
+        });
+
+        diary_text = findViewById(R.id.diary_text);
+
+        diary_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // AlertDialog.Builder를 사용하여 다이얼로그 생성
+                AlertDialog.Builder builder = new AlertDialog.Builder(DiaryActivity.this);
+                // 다이얼로그 레이아웃을 inflate하여 설정
+                View dialogView = getLayoutInflater().inflate(R.layout.dialog_diary_text, null);
+                builder.setView(dialogView);
+
+                // 다이얼로그 내의 View를 찾아와 설정
+                final TextView dialogTextView = dialogView.findViewById(R.id.dialogTextView);
+
+                // diary_text의 내용을 dialogTextView에 설정
+                String diaryText = diary_text.getText().toString();
+                dialogTextView.setText(diaryText);
+
+                // 확인 버튼 추가
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 확인 버튼을 눌렀을 때의 동작 추가
+                        String dialogText = dialogTextView.getText().toString();
+                        diary_text.setText(dialogText);
+                        dialog.dismiss(); // 다이얼로그 닫기
+                    }
+                });
+
+                // 다이얼로그 표시
+                builder.create().show();
             }
         });
 
