@@ -64,6 +64,7 @@
         android:src="@drawable/pinokio"
         android:layout_below="@id/usernamebar"
         android:layout_centerHorizontal="true"
+        android:clickable="true"
         />
 
 
@@ -80,6 +81,7 @@
 
 
     <Button
+        android:id="@+id/btn_upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_content"
