@@ -9,10 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.myapplication.controller.Api;
+import com.example.myapplication.dto.AuthResponse;
+import com.example.myapplication.dto.LoginRequest;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText et_id, et_pass;
     private Button btn_login, btn_register;
+    private Api api;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +45,30 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //EditText에 현재 입력된 값을 가져온다
-//                String userID = et_id.getText().toString();
-//                String userPass = et_pass.getText().toString();
+                String userID = et_id.getText().toString();
+                String userPass = et_pass.getText().toString();
+
+                api = set_retrofit.getClient().create(Api.class);
+                Call<AuthResponse> call = api.login(new LoginRequest(userID, userPass));
+
+                call.clone().enqueue(new Callback<AuthResponse>() {
+                    @Override
+                    public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                        // 응답 처리 (토큰 분리 및 저장)
+                        if(response.isSuccessful()) {
+                            AuthResponse authResponse = response.body();
+                        }
+                        else {
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<AuthResponse> call, Throwable t) {
+
+                    }
+                });
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
