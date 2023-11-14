@@ -100,6 +100,9 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             // 서버 응답을 받았을 때 데이터를 로그로 확인
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            Toast.makeText(RegisterActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
+                            startActivity(intent);
                             try {
                                 Log.e("Response Data", response.body().string());
                             } catch (IOException e) {
@@ -113,10 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.e("POST", "실패");
                     }
                 });
-
-//                Intent intent = new Intent(this, LoginActivity.class);
-//                Toast.makeText(RegisterActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_LONG).show();
-//                startActivity(intent);
             }
         });
 
