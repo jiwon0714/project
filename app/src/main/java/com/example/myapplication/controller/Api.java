@@ -6,11 +6,16 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 import com.example.myapplication.dto.ImageDTO;
+import com.example.myapplication.dto.UserDTO;
 import com.example.myapplication.dto.post;
 
 public interface Api {
     @GET("sample_post")
     Call<post> getData();
+
+
+    @POST("add")
+    Call<ResponseBody> addNewUser(@Body UserDTO jsonUser);
 
     @POST("upload")
     Call <ResponseBody> postImage(@Body ImageDTO imageDTO);
