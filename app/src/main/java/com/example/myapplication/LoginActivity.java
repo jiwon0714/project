@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 api = retrofit.create(Api.class);
                 Call<AuthResponse> call = api.login(new LoginRequest(userID, userPass));
-
                 call.clone().enqueue(new Callback<AuthResponse>() {
                     @Override
                     public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
@@ -71,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", MODE_PRIVATE).edit();
                                 editor.putString("token", jwtToken);
                                 editor.apply();
+                                set_retrofit.set_context(getApplicationContext());
                                 Log.i("Login", "Success");
                             }
                             else {

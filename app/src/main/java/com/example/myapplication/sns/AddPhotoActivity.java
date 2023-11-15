@@ -1,30 +1,48 @@
 package com.example.myapplication.sns;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.Navi;
 import com.example.myapplication.R;
+import com.example.myapplication.controller.Api;
+import com.example.myapplication.dto.ImageDTO;
+import com.example.myapplication.set_retrofit;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddPhotoActivity extends AppCompatActivity {
 
-    private static final int SELECT_PICTURE = 1;
+    private ActivityResultLauncher<Intent> imagePickerLauncher;
     ImageButton back, mainimage;
-
-
+    private ImageDTO imageDTO = new ImageDTO();
     ImageButton btn_camera, btn_sns, btn_home, btn_paint, btn_chat, btn_diary;
+    Button btn_upload;
+    EditText editText;
+    private Api api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +64,7 @@ public class AddPhotoActivity extends AppCompatActivity {
 
         //뒤로 가기 버튼
         back = findViewById(R.id.back);
-        back.setOnClickListener(v -> onBackPressed() );
-
-
+        back.setOnClickListener(v -> onBackPressed());
 
         btn_home = findViewById(R.id.btn_home);
         btn_chat = findViewById(R.id.btn_chat);
@@ -57,27 +73,73 @@ public class AddPhotoActivity extends AppCompatActivity {
         btn_paint = findViewById(R.id.btn_paint);
         btn_diary = findViewById(R.id.btn_diary);
 
+        btn_upload = findViewById(R.id.btn_upload);
+
         Navi navi = new Navi(this); // 'this'는 현재 액티비티의 Context를 나타냅니다.
         navi.setImageButtonListeners(btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary);
 
-
         mainimage = findViewById(R.id.mainimage);
+        editText = findViewById(R.id.et_content);
+
+        imagePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Uri selectedImageUri = data.getData();
+
+                        try {
+                            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri));
+                            String encodedImage = bitmap_to_base64(bitmap);
+                            // new_post.setImg(encodedImage);
+                            imageDTO.setImg(encodedImage);
+                            mainimage.setImageBitmap(bitmap);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+        );
 
         mainimage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // 갤러리에서 이미지를 선택하는 인텐트를 생성
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent, SELECT_PICTURE); // SELECT_PICTURE는 상수로 정의된 정수입니다.
+            public void onClick(View v) {
+                // 이미지 선택창 생성
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                imagePickerLauncher.launch(intent);
             }
         });
 
+        btn_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageDTO.setTxt(editText.getText().toString());
+                api = set_retrofit.getClient().create(Api.class);
+                Call<ResponseBody> call = api.postImage(imageDTO);
 
+                call.clone().enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            // 서버 응답을 받았을 때 데이터를 로그로 확인
+                            try {
+                                Log.e("Response Data", response.body().string());
+                            } catch (IOException e) {
+                                Log.e("POST", "응답 데이터 읽기 실패");
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("POST_FAIL", t.getMessage());
+                    }
+                });
+            }
+        });
 
-
-    }
-
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -104,6 +166,12 @@ public class AddPhotoActivity extends AppCompatActivity {
             }
         }
     }
-
-
+    */
+    }
+    private String bitmap_to_base64 (Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
 }

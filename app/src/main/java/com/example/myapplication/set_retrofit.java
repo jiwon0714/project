@@ -12,10 +12,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class set_retrofit {
     private static Retrofit retrofit = null;
-    private static final String BASE_URL = "http://192.168.0.41:8080/demo/";
+    private static final String BASE_URL = "http://192.168.0.11:8080/demo/";
     private static Context context;
-    private static SharedPreferences prefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-    private static String jwtToken = prefs.getString("token", null);
+    private static SharedPreferences prefs;
+    private static String jwtToken;
+
+    public static void set_context(Context context2) {
+        context = context2;
+        prefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        jwtToken = prefs.getString("token", null);
+    }
 
     public static Retrofit getClient() {
         if(retrofit == null) {
