@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class set_retrofit {
     private static Retrofit retrofit = null;
-    private static final String BASE_URL = "http://192.168.0.11:8080/demo/";
+    private static final String BASE_URL = "http://192.168.56.1:8080/demo/";
     private static Context context;
     private static SharedPreferences prefs;
     private static String jwtToken;

@@ -1,5 +1,8 @@
 package com.example.myapplication.sns;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +31,7 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
         holder.onBind(mSnsList.get(position));
     }
 
-    public void setSnsList(ArrayList<SnsItem> list){
+    public void setSnsList(ArrayList<SnsItem> list) {
         this.mSnsList = list;
         notifyDataSetChanged();
     }
@@ -56,18 +59,21 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
             profile = (ImageView) itemView.findViewById(R.id.img_profile);
             name = (TextView) itemView.findViewById(R.id.tv_profile);
             text = (TextView) itemView.findViewById(R.id.sns_main);
-
-
         }
 
-        void onBind(SnsItem item){
-            profile.setImageResource(item.getResourceId_profile());
-            main_image.setImageResource(item.getResourceId_main_image());
+        void onBind(SnsItem item) {
+            // Base64 문자열을 Bitmap으로 디코딩하여 이미지뷰에 설정
+            Bitmap profileBitmap = item.getBase64ImageProfile();
+            Bitmap mainImageBitmap = item.getBase64ImageMain();
+
+            profile.setImageBitmap(profileBitmap);
+            main_image.setImageBitmap(mainImageBitmap);
 
             name.setText(item.getName());
             text.setText(item.getText());
             comment.setText(item.getComment());
-            comment_name.setText(item.getComment_name());
+            comment_name.setText(item.getCommentName());
         }
+        // Base64 문자열을 Bitmap으로 디코딩하는 메서드
     }
 }

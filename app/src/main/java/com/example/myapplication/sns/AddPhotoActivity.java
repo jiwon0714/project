@@ -18,16 +18,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myapplication.LoginActivity;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.Navi;
 import com.example.myapplication.R;
+import com.example.myapplication.RegisterActivity;
 import com.example.myapplication.controller.Api;
 import com.example.myapplication.dto.ImageDTO;
 import com.example.myapplication.set_retrofit;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -42,6 +48,8 @@ public class AddPhotoActivity extends AppCompatActivity {
     ImageButton btn_camera, btn_sns, btn_home, btn_paint, btn_chat, btn_diary;
     Button btn_upload;
     EditText editText;
+
+    TextView userName;
     private Api api;
 
     @Override
@@ -80,7 +88,7 @@ public class AddPhotoActivity extends AppCompatActivity {
 
         mainimage = findViewById(R.id.mainimage);
         editText = findViewById(R.id.et_content);
-
+        userName = findViewById(R.id.tv_profile);
         imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -115,6 +123,25 @@ public class AddPhotoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 imageDTO.setTxt(editText.getText().toString());
+                imageDTO.setName(userName.getText().toString());
+                // 현재 날짜와 시간을 가져오기
+                LocalDateTime currentDateTime = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    currentDateTime = LocalDateTime.now();
+                }
+
+                // 날짜 및 시간 형식 지정
+                DateTimeFormatter formatter = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                }
+                String formattedDateTime = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    formattedDateTime = currentDateTime.format(formatter);
+                }
+
+                imageDTO.setDate(formattedDateTime);
+
                 api = set_retrofit.getClient().create(Api.class);
                 Call<ResponseBody> call = api.postImage(imageDTO);
 
@@ -123,6 +150,9 @@ public class AddPhotoActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             // 서버 응답을 받았을 때 데이터를 로그로 확인
+                            Intent intent = new Intent(AddPhotoActivity.this, SnsListActivity.class);
+                            Toast.makeText(AddPhotoActivity.this, "업로드가 완료되었습니다.", Toast.LENGTH_LONG).show();
+                            startActivity(intent);
                             try {
                                 Log.e("Response Data", response.body().string());
                             } catch (IOException e) {

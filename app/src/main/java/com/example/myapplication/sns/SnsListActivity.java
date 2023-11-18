@@ -5,16 +5,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.myapplication.Navi;
 import com.example.myapplication.R;
+import com.example.myapplication.controller.Api;
+import com.example.myapplication.dto.ImageDTO;
+import com.example.myapplication.set_retrofit;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class SnsListActivity extends AppCompatActivity {
 
@@ -25,12 +37,35 @@ public class SnsListActivity extends AppCompatActivity {
     private SnsRecyclerAdapter mRecyclerAdapter;
     private ArrayList<SnsItem> mSnsItems;
 
+    private Api api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sns_activity_sns_list);
 
+        api = set_retrofit.getClient().create(Api.class);
+        Call<List<ImageDTO>> call = api.getImage();
+        call.enqueue(new Callback<List<ImageDTO>>() {
+            @Override
+            public void onResponse(Call<List<ImageDTO>> call, Response<List<ImageDTO>> response) {
+                if (response.isSuccessful()) {
+                    List<ImageDTO> imageList = response.body();
+                    for (ImageDTO post : imageList) {
+                        Bitmap bitmap = base64ToBitmap(post.getImg());
+                        mSnsItems.add(new SnsItem(bitmap, post.getName(), bitmap,post.getTxt(),"댓글", "댓글"));
+                    }
 
+                } else {
+                    System.out.println("Error");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ImageDTO>> call, Throwable t) {
+                // 네트워크 오류 또는 서버 응답 실패 시 처리
+            }
+        });
 
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
         int newUiOptions = uiOptions;
@@ -44,7 +79,6 @@ public class SnsListActivity extends AppCompatActivity {
         newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
         newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
-
 
         add = findViewById(R.id.add);
 
@@ -67,8 +101,6 @@ public class SnsListActivity extends AppCompatActivity {
         Navi navi = new Navi(this); // 'this'는 현재 액티비티의 Context를 나타냅니다.
         navi.setImageButtonListeners(btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary);
 
-
-
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         /* initiate adapter */
@@ -79,14 +111,17 @@ public class SnsListActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,false));
 
-
         /* adapt data */
         mSnsItems = new ArrayList<>();
-        for(int i=1;i<=4;i++){
-            mSnsItems.add(new SnsItem(R.drawable.pinokio_circle, i+"번째 사람", R.drawable.pinokio_circle,i+"번째 글",i+"번째 댓글 단 사람", i+"번째 댓글"));
-        }
+//        for(int i=1;i<=4;i++){
+//            mSnsItems.add(new SnsItem(R.drawable.pinokio_circle, i+"번째 사람", R.drawable.pinokio_circle,i+"번째 글",i+"번째 댓글 단 사람", i+"번째 댓글"));
+//        }
+        // api = set_retrofit.getClient().create(Api.class);
+
         mRecyclerAdapter.setSnsList(mSnsItems);
-
-
+    }
+    private Bitmap base64ToBitmap(String base64String) {
+        byte[] decodedBytes = Base64.decode(base64String, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 }
