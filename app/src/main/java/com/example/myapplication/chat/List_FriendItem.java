@@ -1,11 +1,11 @@
 package com.example.myapplication.chat;
 
-public class FriendItem {
+public class List_FriendItem {
     String name;
     String message;
     int resourceId;
 
-    public FriendItem(int resourceId, String name, String message) {
+    public List_FriendItem(int resourceId, String name, String message) {
         this.name = name;
         this.message= message;
         this.resourceId = resourceId;

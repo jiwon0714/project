@@ -1,4 +1,4 @@
-package com.example.myapplication.Diary;
+package com.example.myapplication.Dont_use_Diary;
 
 public class DiaryItem {
     String title;

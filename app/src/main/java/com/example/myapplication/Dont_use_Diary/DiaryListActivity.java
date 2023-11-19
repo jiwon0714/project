@@ -1,4 +1,4 @@
-package com.example.myapplication.Diary;
+package com.example.myapplication.Dont_use_Diary;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

@@ -29,13 +29,13 @@
             android:exported="false"
             android:theme="@style/PopupTheme" />
         <activity
-            android:name=".Diary.DiaryActivity"
+            android:name=".Dont_use_Diary.DiaryActivity"
             android:exported="false" />
         <activity
-            android:name=".Diary.DiaryListActivity"
+            android:name=".Dont_use_Diary.DiaryListActivity"
             android:exported="false" />
         <activity
-            android:name=".chat.ChatListActivity"
+            android:name=".chat.List_ChatListActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

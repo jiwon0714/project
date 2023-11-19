@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,13 +15,13 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-public class ChatListActivity extends AppCompatActivity {
+public class List_ChatListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private ChatRecyclerAdapter mRecyclerAdapter;
-    private ArrayList<FriendItem> mfriendItems;
+    private List_ChatRecyclerAdapter mRecyclerAdapter;
+    private ArrayList<List_FriendItem> mfriendItems;
 
-    private ImageButton btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary;
+    private ImageButton btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary,add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,19 @@ public class ChatListActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
 
+        add = findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(List_ChatListActivity.this, ChatActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
         btn_home = findViewById(R.id.btn_home);
         btn_chat = findViewById(R.id.btn_chat);
         btn_sns = findViewById(R.id.btn_sns);
@@ -55,7 +69,7 @@ public class ChatListActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         /* initiate adapter */
-        mRecyclerAdapter = new ChatRecyclerAdapter();
+        mRecyclerAdapter = new List_ChatRecyclerAdapter();
 
         /* initiate recyclerview */
         mRecyclerView.setAdapter(mRecyclerAdapter);
@@ -66,7 +80,7 @@ public class ChatListActivity extends AppCompatActivity {
         /* adapt data */
         mfriendItems = new ArrayList<>();
         for(int i=1;i<=10;i++){
-            mfriendItems.add(new FriendItem(R.drawable.pinokio_circle,i+"번째 사람",i+"번째 상태메시지"));
+            mfriendItems.add(new List_FriendItem(R.drawable.pinokio_circle,i+"번째 사람",i+"번째 상태메시지"));
         }
         mRecyclerAdapter.setFriendList(mfriendItems);
     }

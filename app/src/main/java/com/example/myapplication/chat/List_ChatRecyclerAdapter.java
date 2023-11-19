@@ -13,13 +13,13 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-public class ChatRecyclerAdapter extends RecyclerView.Adapter<ChatRecyclerAdapter.ViewHolder> {
+public class List_ChatRecyclerAdapter extends RecyclerView.Adapter<List_ChatRecyclerAdapter.ViewHolder> {
 
-    private ArrayList<FriendItem> mFriendList;
+    private ArrayList<List_FriendItem> mFriendList;
 
     @NonNull
     @Override
-    public ChatRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public List_ChatRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item_recyclerview, parent, false);
         return new ViewHolder(view);
     }
@@ -29,7 +29,7 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<ChatRecyclerAdapte
         holder.onBind(mFriendList.get(position));
     }
 
-    public void setFriendList(ArrayList<FriendItem> list){
+    public void setFriendList(ArrayList<List_FriendItem> list){
         this.mFriendList = list;
         notifyDataSetChanged();
     }
@@ -52,7 +52,7 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<ChatRecyclerAdapte
             message = (TextView) itemView.findViewById(R.id.message);
         }
 
-        void onBind(FriendItem item){
+        void onBind(List_FriendItem item){
             profile.setImageResource(item.getResourceId());
             name.setText(item.getName());
             message.setText(item.getMessage());

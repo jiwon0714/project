@@ -69,7 +69,8 @@
             <ImageView
                 android:id="@+id/diary_image"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
+                android:scaleType="centerInside"
                 android:src="@drawable/pinokio_circle" />
 
 

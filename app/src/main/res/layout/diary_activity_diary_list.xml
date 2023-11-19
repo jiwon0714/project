@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Diary.DiaryListActivity">
+    tools:context=".Dont_use_Diary.DiaryListActivity">
 
 
     <TextView
