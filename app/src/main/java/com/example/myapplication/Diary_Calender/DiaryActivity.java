@@ -1,6 +1,10 @@
 package com.example.myapplication.Diary_Calender;
 
 
+import static com.example.myapplication.Diary_Calender.DiaryFileManager.FILE_NAME_PREFIX;
+import static com.example.myapplication.Diary_Calender.DiaryFileManager.getDiaryImageFromFile;
+import static com.example.myapplication.Diary_Calender.DiaryFileManager.saveDiaryImageToFile;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -39,11 +43,10 @@ public class DiaryActivity extends AppCompatActivity {
     CalendarView calendar;
     ImageView image;
 
-    TextView selected_date;
+    TextView selected_date,btn_delete;
 
     TextView diary_text;
 
-    ImageView diary_image;
 
     private static final int REQUEST_IMAGE_PICK = 1;
     AlertDialog alertDialog;
@@ -98,7 +101,13 @@ public class DiaryActivity extends AppCompatActivity {
         navi.setImageButtonListeners(btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary);
 
 
-
+        btn_delete = findViewById(R.id.btn_delete);
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteDiaryContent();
+            }
+        });
 
 
         selected_date.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +132,20 @@ public class DiaryActivity extends AppCompatActivity {
                         // 해당 날짜에 대한 일기 내용을 불러와서 diary_text에 설정
                         String diaryText = getDiaryTextFromFile(selectedDate);
                         diary_text.setText(diaryText);
+
+                        // 해당 날짜에 대한 이미지를 불러와서 diary_image에 설정
+                        Bitmap diaryImage = DiaryFileManager.getDiaryImageFromFile(getApplicationContext(), selected_date.getText().toString());
+                        if (diaryImage != null) {
+                            ImageView diaryImageView = findViewById(R.id.diary_image);
+                            diaryImageView.setImageBitmap(diaryImage);
+                            diaryImageView.setVisibility(View.VISIBLE);
+                        } else {
+                            // 해당 날짜에 이미지가 없으면 diary_image를 숨김
+                            ImageView diaryImageView = findViewById(R.id.diary_image);
+                            diaryImageView.setVisibility(View.GONE);
+                        }
                     }
+
                 });
             }
         });
@@ -152,30 +174,20 @@ public class DiaryActivity extends AppCompatActivity {
                 dialogTextView.setText(diaryText);
 
 
+
                 // 다이얼로그 안에 날짜 설정
                 final TextView dialogDate = dialogView.findViewById(R.id.dialogPutdate);
 
                 String dialogSelectedDate = selected_date.getText().toString();
                 dialogDate.setText(dialogSelectedDate);
 
-//                // 확인 버튼 추가
-//                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // 확인 버튼을 눌렀을 때의 동작 추가
-//                        String dialogText = dialogTextView.getText().toString();
-//                        diary_text.setText(dialogText);
-//                        // 해당 날짜와 텍스트를 파일에 저장
-//                        saveDiaryTextToFile(selected_date.getText().toString(), dialogText);
-//                        dialog.dismiss(); // 다이얼로그 닫기
-//                    }
-//                });
+
 
                 Button ok_btn = dialogView.findViewById(R.id.ok_btn);
                 ok_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "확인 버튼을 눌렀습니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_LONG).show();
 
                         // 확인 버튼을 눌렀을 때의 동작 추가
                         String dialogText = dialogTextView.getText().toString();
@@ -192,7 +204,7 @@ public class DiaryActivity extends AppCompatActivity {
                 btn_pic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "사진을 선택해 주세요..", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "사진을 선택해 주세요.", Toast.LENGTH_LONG).show();
 
                         openGallery();
                     }
@@ -215,6 +227,13 @@ public class DiaryActivity extends AppCompatActivity {
                 dialogImageView.setImageBitmap(defaultImage);
                 dialogImageView.setVisibility(View.GONE);
 
+
+                Bitmap diaryImage = DiaryFileManager.getDiaryImageFromFile(getApplicationContext(), selected_date.getText().toString());
+                if (diaryImage != null) {
+
+                    dialogImageView.setImageBitmap(diaryImage);
+                    dialogImageView.setVisibility(View.VISIBLE);
+                }
 
                 // 다이얼로그 객체 생성
                 alertDialog = builder.create();
@@ -274,14 +293,14 @@ public class DiaryActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_IMAGE_PICK);
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
-            // 갤러리에서 이미지를 선택한 경우
             Uri selectedImageUri = data.getData();
             try {
-                // 선택한 이미지를 비트맵으로 변환하여 이미지뷰에 설정
                 InputStream imageStream = getContentResolver().openInputStream(selectedImageUri);
                 Bitmap selectedImageBitmap = BitmapFactory.decodeStream(imageStream);
 
@@ -292,8 +311,13 @@ public class DiaryActivity extends AppCompatActivity {
                         dialogImageView.setImageBitmap(selectedImageBitmap);
                         dialogImageView.setVisibility(View.VISIBLE);
 
+                        // diary_image에도 설정
+                        ImageView diaryImage = findViewById(R.id.diary_image);
+                        diaryImage.setImageBitmap(selectedImageBitmap);
+                        diaryImage.setVisibility(View.VISIBLE);
 
-
+                        // 해당 날짜와 이미지를 파일에 저장
+                        DiaryFileManager.saveDiaryImageToFile(getApplicationContext(), selected_date.getText().toString(), selectedImageBitmap);
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -302,6 +326,25 @@ public class DiaryActivity extends AppCompatActivity {
         }
     }
 
+
+    private void deleteDiaryContent() {
+        String selectedDate = selected_date.getText().toString();
+
+        // 삭제할 텍스트 파일 이름
+        String textFileName = FILE_NAME_PREFIX + selectedDate.replace(".", "_") + ".txt";
+        // 삭제할 이미지 파일 이름
+        String imageFileName = FILE_NAME_PREFIX + selectedDate.replace(".", "_") + "_image.png";
+
+        // 파일 삭제
+        deleteFile(textFileName);
+        deleteFile(imageFileName);
+
+        // UI 업데이트: 내용 및 이미지 숨김
+        diary_text.setText("");
+        image.setVisibility(View.GONE);
+
+        Toast.makeText(getApplicationContext(), "내용이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+    }
 
     private void saveDiaryTextToFile(String date, String text) {
         DiaryFileManager.saveDiaryText(this, date, text);

@@ -53,8 +53,8 @@
             <ImageView
                 android:id="@+id/dialogImageView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:scaleType="centerInside"
+                android:layout_height="300dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/pinokio_circle" />
 
 
@@ -64,7 +64,10 @@
                 android:layout_height="1000dp"
                 android:layout_below="@+id/bar"
                 android:text="dddddddd"
-                android:textSize="35dp" />
+                android:textSize="35dp"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:layout_gravity="start"/>
         </LinearLayout>
     </ScrollView>
 

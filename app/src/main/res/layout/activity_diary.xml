@@ -28,9 +28,11 @@
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:textSize="30dp"
             android:layout_gravity="center"
             android:text="date"
+            android:layout_centerHorizontal="true"
             android:clickable="true"
             android:onClick="onDateClick"/>
 
@@ -38,10 +40,21 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1"
+            android:layout_weight="0.45"
             android:layout_gravity="center"
             android:layout_marginHorizontal="10dp"
             android:background="#aaa"/>
+
+        <TextView
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="삭제하기"
+            android:textSize="25dp"
+            android:clickable="true"
+            android:layout_marginRight="10dp"
+            />
+
 
     </LinearLayout>
 
@@ -51,6 +64,7 @@
         android:layout_height="match_parent"
         android:layout_above="@id/bottombar"
         android:layout_below="@+id/date_bar"
+        android:layout_marginTop="30dp"
         >
 
         <LinearLayout
@@ -70,12 +84,13 @@
                 android:id="@+id/diary_image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
                 android:src="@drawable/pinokio_circle" />
 
 
             <TextView
                 android:id="@+id/diary_text"
+                android:hint="여기를 눌러 글을 작성해주세요!"
                 android:layout_width="match_parent"
                 android:layout_height="1000dp"
                 android:textSize="35dp"
