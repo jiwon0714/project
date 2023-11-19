@@ -43,6 +43,8 @@ public class DiaryActivity extends AppCompatActivity {
 
     TextView diary_text;
 
+    ImageView diary_image;
+
     private static final int REQUEST_IMAGE_PICK = 1;
     AlertDialog alertDialog;
 
@@ -156,24 +158,24 @@ public class DiaryActivity extends AppCompatActivity {
                 String dialogSelectedDate = selected_date.getText().toString();
                 dialogDate.setText(dialogSelectedDate);
 
-                // 확인 버튼 추가
-                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 확인 버튼을 눌렀을 때의 동작 추가
-                        String dialogText = dialogTextView.getText().toString();
-                        diary_text.setText(dialogText);
-                        // 해당 날짜와 텍스트를 파일에 저장
-                        saveDiaryTextToFile(selected_date.getText().toString(), dialogText);
-                        dialog.dismiss(); // 다이얼로그 닫기
-                    }
-                });
+//                // 확인 버튼 추가
+//                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // 확인 버튼을 눌렀을 때의 동작 추가
+//                        String dialogText = dialogTextView.getText().toString();
+//                        diary_text.setText(dialogText);
+//                        // 해당 날짜와 텍스트를 파일에 저장
+//                        saveDiaryTextToFile(selected_date.getText().toString(), dialogText);
+//                        dialog.dismiss(); // 다이얼로그 닫기
+//                    }
+//                });
 
                 Button ok_btn = dialogView.findViewById(R.id.ok_btn);
                 ok_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "OK 버튼을 눌렀습니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "확인 버튼을 눌렀습니다.", Toast.LENGTH_LONG).show();
 
                         // 확인 버튼을 눌렀을 때의 동작 추가
                         String dialogText = dialogTextView.getText().toString();
@@ -185,13 +187,26 @@ public class DiaryActivity extends AppCompatActivity {
                     }
                 });
 
-                // Negative 버튼 설정
-                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                Button btn_pic = dialogView.findViewById(R.id.btn_pic);
+
+                btn_pic.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 취소 버튼 동작
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "사진을 선택해 주세요..", Toast.LENGTH_LONG).show();
+
+                        openGallery();
                     }
                 });
+
+                ImageButton dismiss = dialogView.findViewById(R.id.dismiss);
+
+                dismiss.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
 
 
                 ImageView dialogImageView = dialogView.findViewById(R.id.dialogImageView);
@@ -200,16 +215,6 @@ public class DiaryActivity extends AppCompatActivity {
                 dialogImageView.setImageBitmap(defaultImage);
                 dialogImageView.setVisibility(View.GONE);
 
-
-                // Neutral 버튼 설정
-                builder.setNeutralButton("사진", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 갤러리로 이동하는 코드
-                        openGallery();
-
-                    }
-                });
 
                 // 다이얼로그 객체 생성
                 alertDialog = builder.create();
@@ -287,7 +292,7 @@ public class DiaryActivity extends AppCompatActivity {
                         dialogImageView.setImageBitmap(selectedImageBitmap);
                         dialogImageView.setVisibility(View.VISIBLE);
 
-                        diary_text.setText("24");
+
 
                     }
                 }
