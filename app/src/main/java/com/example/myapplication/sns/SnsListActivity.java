@@ -60,7 +60,6 @@ public class SnsListActivity extends AppCompatActivity {
         btn_home = findViewById(R.id.btn_home);
         btn_chat = findViewById(R.id.btn_chat);
         btn_sns = findViewById(R.id.btn_sns);
-        btn_camera = findViewById(R.id.btn_camera);
         btn_paint = findViewById(R.id.btn_paint);
         btn_diary = findViewById(R.id.btn_diary);
 

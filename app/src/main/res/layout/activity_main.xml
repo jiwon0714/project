@@ -36,7 +36,7 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/round_button"
+        android:background="@color/transparent"
         android:scaleType="centerInside"
         android:src="@drawable/iu1" />
 

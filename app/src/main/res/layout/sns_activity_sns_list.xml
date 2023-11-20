@@ -61,18 +61,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="710dp"
+        android:layout_height="match_parent"
         android:layout_above="@+id/bottombar"
-        android:layout_below="@+id/topbar"
-        android:layout_marginTop="123dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_below="@+id/bar2"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="17dp" />
 
     <LinearLayout
         android:id="@+id/bottombar"
         android:layout_width="match_parent"
         android:layout_height="152dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="156dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -132,11 +131,11 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/topbar"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/bar2">
 
@@ -149,7 +148,7 @@
             android:layout_marginRight="4dp"
             android:background="#CCCCCC"
             android:scaleType="fitCenter"
-            android:src="@drawable/add"
+            android:src="@drawable/add"/>
 
 
         <EditText

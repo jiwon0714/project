@@ -41,12 +41,7 @@ public class Navi {
             }
         });
 
-        btn_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startNewActivity(CameraActivity.class);
-            }
-        });
+
 
         btn_diary.setOnClickListener(new View.OnClickListener() {
             @Override

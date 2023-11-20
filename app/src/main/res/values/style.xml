@@ -61,5 +61,7 @@
 
 
 
-
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">100%</item>
+    </style>
 </resources>

@@ -1,18 +1,19 @@
 package com.example.myapplication.chat;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.sns.SnsItem;
+import com.example.myapplication.RegisterActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class ChatActivity extends AppCompatActivity {
     private ChatAdapter chatAdapter;
     private List<ChatMessage> messageList;
 
+    private ImageButton backtolist;
 
 
     @Override
@@ -62,7 +64,15 @@ public class ChatActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
 
+        backtolist = findViewById(R.id.back);
 
+        backtolist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this, List_ChatListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

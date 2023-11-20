@@ -45,7 +45,7 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView2);
         btn_picture = findViewById(R.id.btn_picture);
         btn_save = findViewById(R.id.btn_save);
         btn_save.setVisibility(View.INVISIBLE);
