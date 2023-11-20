@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="🔍검색"
+        android:fontFamily="@font/soyo_maple"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/back"
         android:layout_toLeftOf="@id/home"
@@ -55,6 +56,7 @@
             android:text="User name"
             android:id="@+id/tv_profile"
             android:textSize="30dp"
+            android:fontFamily="@font/soyo_maple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -81,7 +83,8 @@
         android:layout_centerHorizontal="true"
         android:background="#CCCCCC"
         android:gravity="center"
-        android:hint="글을 작성하세요." />
+        android:hint="글을 작성하세요."
+        android:fontFamily="@font/soyo_maple"/>
 
 
     <android.widget.Button
@@ -91,10 +94,10 @@
         android:layout_below="@+id/et_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"
-        android:background="#FF9800"
-        android:backgroundTint="#FF9800"
+        android:background="@drawable/border2"
         android:fontFamily="@font/soyo_maple"
-        android:text="업로드" />
+        android:text="업로드"
+        android:textColor="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
