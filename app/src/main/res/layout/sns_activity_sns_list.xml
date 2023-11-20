@@ -6,35 +6,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
+
+
     <LinearLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/add"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/add"
-            android:background="#CCCCCC"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_alignParentLeft="true" />
 
-        <EditText
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="141dp"
+            android:layout_height="131dp"
+            android:src="@drawable/pinokio_login"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_marginTop="5dp"
-            android:hint="🔍검색"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/add"
-            android:layout_toLeftOf="@id/home" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/soyo_maple"
+            android:text="피노키오"
+            android:textColor="#FF9800"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toTopOf="@+id/et_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.667"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.661" />
 
     </LinearLayout>
+
+
 
     <!--구분선-->
     <View
@@ -47,78 +60,112 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_below="@+id/topbar"
-        android:layout_above="@+id/bottombar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="710dp"
+        android:layout_above="@+id/bottombar"
+        android:layout_below="@+id/topbar"
+        android:layout_marginTop="123dp"
+        android:layout_marginBottom="8dp" />
 
     <LinearLayout
         android:id="@+id/bottombar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#000000"
-        android:gravity="center"
+        android:layout_height="152dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="156dp"
+        android:gravity="center"
         android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_paint"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="70dp"
+            android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/icon_paint" />
+
+
+        <ImageButton
+            android:id="@+id/btn_chat"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="70dp"
+            android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/message" />
 
         <ImageButton
             android:id="@+id/btn_home"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginRight="70dp"
             android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
-            android:background="#000000"
             app:srcCompat="@drawable/icon_home" />
 
-        <ImageButton
-            android:id="@+id/btn_camera"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:layout_marginLeft="20dp"
-            android:background="#000000"
-            app:srcCompat="@drawable/icon_camera" />
 
         <ImageButton
             android:id="@+id/btn_sns"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="70dp"
             android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
-            android:background="#000000"
-            app:srcCompat="@drawable/p_color" />
-
-        <ImageButton
-            android:id="@+id/btn_paint"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:background="#000000"
-            app:srcCompat="@drawable/icon_paint" />
-
-        <ImageButton
-            android:id="@+id/btn_chat"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:background="#000000"
-            android:layout_marginLeft="20dp"
-            app:srcCompat="@drawable/chat_color" />
+            app:srcCompat="@drawable/posting" />
 
         <ImageButton
             android:id="@+id/btn_diary"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
-            android:background="#000000"
-            android:layout_marginLeft="20dp"
-            app:srcCompat="@drawable/diary_color" />
+            app:srcCompat="@drawable/diary" />
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/topbar"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/bar2">
+
+
+        <ImageButton
+            android:id="@+id/add"
+            android:layout_width="57dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+            android:background="#CCCCCC"
+            android:scaleType="fitCenter"
+            android:src="@drawable/add"
+
+
+        <EditText
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/topbar"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:fontFamily="@font/soyo_maple"
+            android:layout_weight="1"
+            android:hint="🔍검색" />
+        />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

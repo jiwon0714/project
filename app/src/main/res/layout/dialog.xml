@@ -13,9 +13,9 @@
         android:layout_gravity="center"
         android:paddingTop="10dp"
         android:text="붓 굵기"
-        android:textColor="@color/textView_app_color"
+        android:textColor="#FF9800"
         android:textSize="40sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/soyo_maple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
