@@ -1,15 +1,17 @@
 package com.example.myapplication.sns;
 
+import android.graphics.Bitmap;
+
 public class SnsItem {
 
     String name;
     String text;
     String comment;
     String comment_name;
-    int resourceId_profile;
-    int resourceId_main_image;
+    Bitmap resourceId_profile;
+    Bitmap resourceId_main_image;
 
-    public SnsItem(int resourceId_profile,String name,int resourceId_main_image,String text,String comment_name, String comment ) {
+    public SnsItem(Bitmap resourceId_profile, String name, Bitmap resourceId_main_image, String text, String comment_name, String comment ) {
         this.name = name;
         this.text= text;
         this.resourceId_profile = resourceId_profile;
@@ -18,11 +20,11 @@ public class SnsItem {
         this.comment_name = comment_name;
     }
 
-    public int getResourceId_profile() {
+    public Bitmap getResourceId_profile() {
         return resourceId_profile;
     }
 
-    public int getResourceId_main_image() {
+    public Bitmap getResourceId_main_image() {
         return resourceId_main_image;
     }
 
@@ -52,9 +54,9 @@ public class SnsItem {
         this.name = name;
     }
 
-    public void setResourceId_profile(int resourceId_profile) {this.resourceId_profile = resourceId_profile;}
+    public void setResourceId_profile(Bitmap resourceId_profile) {this.resourceId_profile = resourceId_profile;}
 
-    public void setResourceId_main_image(int resourceId_main_image) {this.resourceId_main_image = resourceId_main_image;}
+    public void setResourceId_main_image(Bitmap resourceId_main_image) {this.resourceId_main_image = resourceId_main_image;}
 
     public void setComment(String comment) {
         this.comment = comment;

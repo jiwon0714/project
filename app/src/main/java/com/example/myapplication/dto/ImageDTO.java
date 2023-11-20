@@ -12,17 +12,20 @@ public class ImageDTO {
     private String img;
     @SerializedName("txt")
     private String txt;
-    @SerializedName("name")
-    private String name;
     @SerializedName("date")
     private String date;
+    @SerializedName("post_owner")
+    private String owner;
 
     public void setImg(String img) { this.img = img; }
     public void setTxt(String txt) {
         this.txt = txt;
     }
     public void setDate(String date) { this.date = date; }
-    public void setName(String name){ this.name = name; }
+    public String getImg() { return this.img; }
+    public String getTxt() { return this.txt; }
+    public String getOwner() { return this.owner; }
+
     public ImageDTO() {}
 
 }

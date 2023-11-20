@@ -86,20 +86,20 @@ public class AddPhotoActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         Uri selectedImageUri = data.getData();
-
-                        try {
-                            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri));
+                    try {
+                        // Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri));
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                        if (bitmap != null) {
                             String encodedImage = bitmap_to_base64(bitmap);
-
-                            int width = mainimage.getWidth();
-                            int height = mainimage.getHeight();
-
-                            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
                             imageDTO.setImg(encodedImage);
-                            mainimage.setImageBitmap(scaledBitmap);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            mainimage.setImageBitmap(bitmap);
+                        } else {
+                            Log.e("Bitmap Decode", "Bitmap is null");
                         }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.e("Image Selection Error", "Error: " + e.getMessage());
+                    }
                     }
                 }
         );
@@ -108,7 +108,7 @@ public class AddPhotoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 이미지 선택창 생성
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 imagePickerLauncher.launch(intent);
             }
@@ -117,6 +117,10 @@ public class AddPhotoActivity extends AppCompatActivity {
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(imageDTO.getImg() == null) {
+                    Toast.makeText(getApplicationContext(), "이미지가 없습니다", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 imageDTO.setTxt(editText.getText().toString());
                 // 현재 날짜와 시간을 가져오기
                 LocalDateTime currentDateTime = null;

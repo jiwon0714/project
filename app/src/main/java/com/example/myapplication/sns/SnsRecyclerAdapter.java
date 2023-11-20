@@ -1,5 +1,6 @@
 package com.example.myapplication.sns;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,11 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
 
     @Override
     public int getItemCount() {
-        return mSnsList.size();
+        try {
+            return mSnsList.size();
+        }catch (Exception e) {
+            return 0;
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -56,13 +61,13 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
             profile = (ImageView) itemView.findViewById(R.id.img_profile);
             name = (TextView) itemView.findViewById(R.id.tv_profile);
             text = (TextView) itemView.findViewById(R.id.sns_main);
-
-
         }
 
         void onBind(SnsItem item){
-            profile.setImageResource(item.getResourceId_profile());
-            main_image.setImageResource(item.getResourceId_main_image());
+            Bitmap mainImageBitmap = item.getResourceId_main_image();
+
+            profile.setImageResource(R.drawable.pinokio_circle);
+            main_image.setImageBitmap(mainImageBitmap);
 
             name.setText(item.getName());
             text.setText(item.getText());
