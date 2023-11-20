@@ -1,91 +1,97 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/baseLayout"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#cccccc"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/imageView_paintBrush_drawing"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerInside"
-            android:background="#CCCCCC"
-            android:src="@drawable/brush_toggle" />
-
-        <ImageButton
-            android:id="@+id/color"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:contentDescription="@string/app_name"
-            android:layout_marginLeft="20dp"
-            android:scaleType="centerInside"
-            android:background="#CCCCCC"
-            android:src="@drawable/color" />
-
-
-
-
-
-        <ImageButton
-            android:id="@+id/btn_eraser"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
-            android:background="#CCCCCC"
-            android:scaleType="centerInside"
-            android:src="@drawable/eraser" />
-        <ImageButton
-            android:id="@+id/btnClear"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
-            android:background="#CCCCCC"
-            android:scaleType="centerInside"
-            android:src="@drawable/trashcan" />
-
-        <ImageButton
-            android:id="@+id/btnGallery"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
-            android:background="#CCCCCC"
-            android:scaleType="centerInside"
-            android:src="@drawable/gallery" />
-
-        <ImageButton
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:id="@+id/btn_picsave"
-            android:layout_marginLeft="20dp"
-            android:background="#00000000"
-            android:scaleType="centerInside"
-            android:src="@drawable/save"/>
-
-        <ImageButton
-            android:id="@+id/painthome"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
-            android:background="#00000000"
-            android:scaleType="centerInside"
-            android:src="@drawable/home" />
-
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/paintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/paintbar"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:background="#cccccc"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageView_paintBrush_drawing"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="45dp"
+                android:background="#CCCCCC"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@drawable/brush_toggle" />
+
+            <ImageButton
+                android:id="@+id/color"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="45dp"
+                android:background="#CCCCCC"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_paint" />
+
+
+            <ImageButton
+                android:id="@+id/btn_eraser"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="45dp"
+                android:background="#CCCCCC"
+                android:scaleType="centerInside"
+                android:src="@drawable/eraser" />
+
+            <ImageButton
+                android:id="@+id/painthome"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_below="@id/paintLayout"
+                android:layout_marginRight="45dp"
+                android:background="#00000000"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_home" />
+
+            <ImageButton
+                android:id="@+id/btnClear"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="45dp"
+                android:background="#CCCCCC"
+                android:scaleType="centerInside"
+                android:src="@drawable/trashcan" />
+
+            <ImageButton
+                android:id="@+id/btnGallery"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="45dp"
+                android:background="#CCCCCC"
+                android:scaleType="centerInside"
+                android:src="@drawable/gallery" />
+
+            <ImageButton
+                android:id="@+id/btn_picsave"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="0dp"
+                android:background="#00000000"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_save" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
 
