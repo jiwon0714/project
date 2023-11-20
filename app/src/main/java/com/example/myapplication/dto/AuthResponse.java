@@ -8,7 +8,11 @@ public class AuthResponse {
 
     public String get_status() { return status; }
     public String get_message() { return message; }
-    public String get_toket() {
+    public String get_token() {
         return authToken;
+    }
+
+    public UserDTO get_user() {
+        return user;
     }
 }

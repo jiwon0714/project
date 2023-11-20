@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.myapplication.controller.Api;
 import com.example.myapplication.dto.AuthResponse;
 import com.example.myapplication.dto.LoginRequest;
+import com.example.myapplication.dto.UserDTO;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,8 +68,10 @@ public class LoginActivity extends AppCompatActivity {
                         if(response.isSuccessful()) {
                             AuthResponse authResponse = response.body();
                             if(authResponse.get_status().equals("201")) {
-                                String jwtToken = response.body().get_toket();
+                                String jwtToken = response.body().get_token();
                                 SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", MODE_PRIVATE).edit();
+                                editor.remove("token");
+                                editor.apply();
                                 editor.putString("token", jwtToken);
                                 editor.apply();
                                 set_retrofit.set_context(getApplicationContext());
