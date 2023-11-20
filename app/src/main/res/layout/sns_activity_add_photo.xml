@@ -40,7 +40,7 @@
 
     <LinearLayout
         android:id="@+id/usernamebar"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:layout_below="@+id/back"
         android:layout_width="match_parent"
@@ -87,7 +87,7 @@
     <android.widget.Button
         android:id="@+id/btn_upload"
         android:layout_width="400dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_below="@+id/et_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"

@@ -51,11 +51,13 @@
 
     <!--구분선-->
     <View
-        android:layout_below="@+id/topbar"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3px"
+        android:background="#aaa"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
         android:layout_marginHorizontal="10dp"
-        android:background="#aaa"/>
+        android:layout_below="@id/topbar"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -64,7 +66,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottombar"
         android:layout_below="@+id/bar2"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="17dp" />
 
     <LinearLayout
@@ -135,7 +137,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/topbar"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/bar2">
 
@@ -152,7 +154,7 @@
 
 
         <EditText
-            android:layout_width="400dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/topbar"
             android:layout_alignParentTop="true"

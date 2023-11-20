@@ -7,6 +7,9 @@
     tools:context=".RegisterActivity">
 
 
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,8 +28,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.7"
                 android:text="back"
-                android:textColor="@color/green"
-                android:textSize="30dp" />
+                android:fontFamily="@font/soyo_maple"
+                android:textColor="#FF9800"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/signup"
@@ -35,8 +39,11 @@
                 android:layout_marginBottom="20dp"
                 android:layout_weight="2"
                 android:text="회원 정보"
-                android:textColor="@color/green"
-                android:textSize="35dp" />
+                android:fontFamily="@font/soyo_maple"
+                android:textColor="#FF9800"
+                android:textSize="25dp" />
+
+
         </LinearLayout>
 
         <ScrollView
@@ -46,183 +53,250 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="30dp"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_sighname"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/soyo_maple"
                     android:text="이름"
-                    android:textColor="@color/green"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
-                    />
+                    android:textColor="#FF9800"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/et_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_width="525dp"
+                    android:layout_height="66dp"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/et_box"
-                    android:ems="15"
+                    android:background="@drawable/border"
+                    android:ems="10"
+                    android:fontFamily="@font/soyo_maple"
                     android:hint=" 이름"
                     android:inputType="textPersonName"
-                    android:text="" />
+                    android:text=""
+                    android:layout_marginTop="20dp"/>
 
                 <TextView
                     android:id="@+id/signIDtext"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/soyo_maple"
                     android:text="아이디"
-                    android:textColor="@color/green"
+                    android:textColor="#FF9800"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"/>
 
                 <EditText
                     android:id="@+id/et_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_width="526dp"
+                    android:layout_height="66dp"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/et_box"
-                    android:ems="15"
+                    android:background="@drawable/border"
+                    android:ems="10"
+                    android:fontFamily="@font/soyo_maple"
                     android:hint=" 아이디"
                     android:inputType="textPersonName"
-                    android:text="" />
+                    android:text=""
+                    android:layout_marginTop="20dp"/>
 
                 <TextView
                     android:id="@+id/signBirthtext"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/soyo_maple"
                     android:text="생년월일"
-                    android:textColor="@color/green"
+                    android:textColor="#FF9800"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"/>
+
+
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:orientation="horizontal">-->
+
+                <!--                    <EditText-->
+                <!--                        android:id="@+id/et_year"-->
+                <!--                        android:layout_width="100dp"-->
+                <!--                        android:layout_height="48dp"-->
+                <!--                        android:layout_marginBottom="20dp"-->
+                <!--                        android:layout_marginRight="10dp"-->
+                <!--                        android:background="@drawable/et_box"-->
+                <!--                        android:ems="10"-->
+                <!--                        android:hint=" 년(4자)"-->
+                <!--                        android:inputType="textPersonName"-->
+                <!--                        android:text="" />-->
+                <!--                    <EditText-->
+                <!--                        android:id="@+id/et_month"-->
+                <!--                        android:layout_width="100dp"-->
+                <!--                        android:layout_height="48dp"-->
+                <!--                        android:layout_marginBottom="20dp"-->
+                <!--                        android:layout_marginRight="10dp"-->
+                <!--                        android:background="@drawable/et_box"-->
+                <!--                        android:ems="10"-->
+                <!--                        android:hint=" 월"-->
+                <!--                        android:inputType="textPersonName"-->
+                <!--                        android:text="" />-->
+                <!--                    <EditText-->
+                <!--                        android:id="@+id/et_day"-->
+                <!--                        android:layout_width="100dp"-->
+                <!--                        android:layout_height="48dp"-->
+                <!--                        android:layout_marginBottom="20dp"-->
+                <!--                        android:background="@drawable/et_box"-->
+                <!--                        android:ems="10"-->
+                <!--                        android:hint=" 일"-->
+                <!--                        android:inputType="textPersonName"-->
+                <!--                        android:text="" />-->
+                <!--                </LinearLayout>-->
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="655dp"
+                    android:layout_height="82dp"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/et_year"
-                        android:layout_width="120dp"
-                        android:layout_height="60dp"
+                        android:id="@+id/et_birth"
+                        android:layout_width="528dp"
+                        android:layout_height="66dp"
+                        android:layout_marginLeft="63dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/et_box"
+                        android:background="@drawable/border"
                         android:ems="10"
-                        android:hint=" 년(4자)"
-                        android:inputType="textPersonName"
-                        android:text="" />
-                    <EditText
-                        android:id="@+id/et_month"
-                        android:layout_width="120dp"
-                        android:layout_height="60dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/et_box"
-                        android:ems="10"
-                        android:hint=" 월"
-                        android:inputType="textPersonName"
-                        android:text="" />
-                    <EditText
-                        android:id="@+id/et_day"
-                        android:layout_width="120dp"
-                        android:layout_height="60dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/et_box"
-                        android:ems="10"
-                        android:hint=" 일"
-                        android:inputType="textPersonName"
-                        android:text="" />
+                        android:fontFamily="@font/soyo_maple"
+                        android:hint=" 생년월일 입력"
+                        android:text=""
+                        android:layout_marginTop="20dp"/>
+
+                    <ImageButton
+                        android:id="@+id/btn_calendar"
+                        android:layout_width="50dp"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/white"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/calendar"
+                        android:layout_marginTop="20dp"/>
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/signPWtext"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/soyo_maple"
                     android:text="비밀번호"
-                    android:textColor="@color/green"
+                    android:textColor="#FF9800"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"/>
 
 
                 <EditText
                     android:id="@+id/et_pass"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_width="528dp"
+                    android:layout_height="61dp"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/et_box"
-                    android:ems="15"
+                    android:background="@drawable/border"
+                    android:ems="10"
+                    android:fontFamily="@font/soyo_maple"
                     android:hint=" 비밀번호"
                     android:inputType="textPassword"
-                    android:text="" />
+                    android:text=""
+                    android:layout_marginTop="20dp"/>
 
                 <TextView
                     android:id="@+id/signPW2text"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/soyo_maple"
                     android:text="비밀번호 확인"
-                    android:textColor="@color/green"
+                    android:textColor="#FF9800"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="662dp"
+                    android:layout_height="91dp"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/et_repass"
-                        android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_width="525dp"
+                        android:layout_height="66dp"
+                        android:layout_marginLeft="63dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
-                        android:background="@drawable/et_box"
-                        android:ems="15"
+                        android:background="@drawable/border"
+                        android:ems="10"
+                        android:fontFamily="@font/soyo_maple"
                         android:hint=" 비밀번호 다시 입력"
                         android:inputType="textPassword"
+
                         android:text="" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_passcheck"
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="66dp"
                         android:layout_marginLeft="10dp"
-                        android:background="@color/green"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/border2"
+                        android:fontFamily="@font/soyo_maple"
                         android:text="확인"
                         android:textColor="@color/white"
-                        android:textSize="25sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/signmailtext"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/soyo_maple"
                     android:text="이메일"
-                    android:textColor="@color/green"
+                    android:textColor="#FF9800"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"/>
 
                 <EditText
                     android:id="@+id/et_mail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_width="535dp"
+                    android:layout_height="61dp"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/et_box"
-                    android:ems="15"
+                    android:background="@drawable/border"
+                    android:ems="10"
+                    android:fontFamily="@font/soyo_maple"
                     android:hint=" 이메일"
                     android:inputType="textPersonName"
-                    android:text="" />
+                    android:text=""
+                    android:layout_marginTop="20dp"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_register"
@@ -231,7 +305,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="35dp"
-                    android:background="@color/green"
+                    android:background="@drawable/border2"
                     android:text="저장"
                     android:textColor="@color/white"
                     android:textSize="16sp"

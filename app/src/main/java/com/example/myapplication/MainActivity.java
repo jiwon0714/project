@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         btn_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(MainActivity.this, AccountActivity.class);
                 startActivity(intent);
             }
         });

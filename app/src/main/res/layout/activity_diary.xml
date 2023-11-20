@@ -24,18 +24,18 @@
             android:layout_gravity="center"
             android:background="#aaa"/>
 
+
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:textSize="30dp"
-            android:layout_gravity="center"
-            android:text="date"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
             android:clickable="true"
-            android:onClick="onDateClick"/>
-
+            android:onClick="onDateClick"
+            android:text="date"
+            android:textSize="30dp" />
 
         <View
             android:layout_width="0dp"

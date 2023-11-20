@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:text="다이어리 목록"
-        android:textColor="#000"
+        android:textColor="#FF9800"
         android:textSize="40sp"
         android:textStyle="bold" />
 
@@ -83,73 +83,68 @@
         />
 
 
+
     <LinearLayout
         android:id="@+id/bottombar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#000000"
+        android:layout_height="152dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/btn_paint"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="70dp"
+            android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/icon_paint" />
+
+
+        <ImageButton
+            android:id="@+id/btn_chat"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="70dp"
+            android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/message" />
+
+
+        <ImageButton
             android:id="@+id/btn_home"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginRight="70dp"
             android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
-            android:background="#000000"
             app:srcCompat="@drawable/icon_home" />
-
-        <ImageButton
-            android:id="@+id/btn_camera"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:layout_marginLeft="20dp"
-            android:background="#000000"
-            app:srcCompat="@drawable/icon_camera" />
 
         <ImageButton
             android:id="@+id/btn_sns"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="70dp"
             android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
-            android:background="#000000"
-            app:srcCompat="@drawable/p_color" />
-
-        <ImageButton
-            android:id="@+id/btn_paint"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:background="#000000"
-            app:srcCompat="@drawable/icon_paint" />
-
-        <ImageButton
-            android:id="@+id/btn_chat"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:background="#000000"
-            android:layout_marginLeft="20dp"
-            app:srcCompat="@drawable/chat_color" />
+            app:srcCompat="@drawable/posting" />
 
         <ImageButton
             android:id="@+id/btn_diary"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
-            android:background="#000000"
-            android:layout_marginLeft="20dp"
-            app:srcCompat="@drawable/diary_color" />
+            app:srcCompat="@drawable/diary" />
     </LinearLayout>
+
 
 </RelativeLayout>

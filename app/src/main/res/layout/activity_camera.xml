@@ -25,7 +25,8 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
 
         <ImageView
@@ -161,6 +162,15 @@
             android:scaleType="centerInside"
             app:srcCompat="@drawable/diary" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:background="#aaa"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:layout_below="@id/topbar"/>
 
 
 </RelativeLayout>
