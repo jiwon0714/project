@@ -48,114 +48,115 @@
         <ImageView
             android:id="@+id/img_profile"
             android:src="@mipmap/ic_launcher"
-            android:layout_width="35dp"
-            android:layout_height="35dp"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"/>
         <TextView
             android:text="User name"
             android:id="@+id/tv_profile"
+            android:textSize="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/mainimage"
-        android:layout_width="match_parent"
+        android:layout_width="600dp"
         android:layout_height="450dp"
         android:src="@drawable/pinokio"
         android:layout_below="@id/usernamebar"
         android:layout_centerHorizontal="true"
         android:clickable="true"
+        android:layout_marginTop="30dp"
         />
 
 
     <EditText
         android:id="@+id/et_content"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="600dp"
+        android:layout_height="300dp"
         android:layout_below="@id/mainimage"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
+        android:layout_centerHorizontal="true"
         android:background="#CCCCCC"
         android:gravity="center"
         android:hint="글을 작성하세요." />
 
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btn_upload"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_content"
-        android:layout_marginTop="5dp"
-        android:background="@color/green"
-        android:text="업로드"></Button>
-
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:background="#FF9800"
+        android:backgroundTint="#FF9800"
+        android:fontFamily="@font/soyo_maple"
+        android:text="업로드" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:background="#000000"
+        android:layout_marginBottom="25dp"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_home"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:background="#000000"
-            app:srcCompat="@drawable/icon_home" />
-
-        <ImageButton
-            android:id="@+id/btn_camera"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:layout_marginLeft="20dp"
-            android:background="#000000"
-            app:srcCompat="@drawable/icon_camera" />
-
-        <ImageButton
-            android:id="@+id/btn_sns"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:background="#000000"
-            app:srcCompat="@drawable/p_color" />
 
         <ImageButton
             android:id="@+id/btn_paint"
-            android:layout_width="70dp"
+            android:layout_width="62dp"
             android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginRight="70dp"
             android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
-            android:background="#000000"
             app:srcCompat="@drawable/icon_paint" />
 
         <ImageButton
             android:id="@+id/btn_chat"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginRight="70dp"
             android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
-            android:background="#000000"
-            android:layout_marginLeft="20dp"
-            app:srcCompat="@drawable/chat_color" />
+            app:srcCompat="@drawable/message" />
+
+        <ImageButton
+            android:id="@+id/btn_home"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="70dp"
+            android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/icon_home" />
+
+
+        <ImageButton
+            android:id="@+id/btn_sns"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="70dp"
+            android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/posting" />
+
 
         <ImageButton
             android:id="@+id/btn_diary"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
-            android:background="#000000"
-            android:layout_marginLeft="20dp"
-            app:srcCompat="@drawable/diary_color" />
+            app:srcCompat="@drawable/diary" />
+
+
     </LinearLayout>
 </RelativeLayout>
