@@ -28,9 +28,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegisterActivity extends AppCompatActivity {
 
     TextView back;
-    EditText name,id,pw,repw,email,et_birthday;
+    EditText name,id,pw,repw,email,birthday;
     Button pwcheck, submit;
-
     Boolean checkPW = false;
 
     private Api api;
@@ -49,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         pw=findViewById(R.id.et_pass);
         repw=findViewById(R.id.et_repass);
         email=findViewById(R.id.et_mail);
+        birthday=findViewById(R.id.et_birth);
 
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
         int newUiOptions = uiOptions;
@@ -89,10 +89,10 @@ public class RegisterActivity extends AppCompatActivity {
             }else if(checkPW == false){
                 Toast.makeText(RegisterActivity.this, "비밀번호를 확인해주세요.", Toast.LENGTH_LONG).show();
             }else{
-                UserDTO userDTO = new UserDTO(id.getText().toString(), name.getText().toString(), email.getText().toString(), pw.getText().toString());
+                UserDTO userDTO = new UserDTO(id.getText().toString(), name.getText().toString(), email.getText().toString(), pw.getText().toString(),birthday.getText().toString());
                 // cmd-ipconfig ipv4 주소로 바꾸기
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.0.11:8080/demo/")
+                        .baseUrl("http://192.168.0.79:8080/demo/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api = retrofit.create(Api.class);

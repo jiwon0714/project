@@ -15,6 +15,7 @@ import com.example.myapplication.controller.Api;
 import com.example.myapplication.dto.AuthResponse;
 import com.example.myapplication.dto.LoginRequest;
 import com.example.myapplication.dto.UserDTO;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText et_id, et_pass;
     private Button btn_login, btn_register;
+    private String id, password;
     private Api api;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 // cmd-ipconfig ipv4 주소로 바꾸기
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.0.11:8080/demo/")
+                        .baseUrl("http://192.168.0.79:8080/demo/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -73,6 +75,12 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.remove("token");
                                 editor.apply();
                                 editor.putString("token", jwtToken);
+                                editor.apply();
+                                // AuthResponse 클래스의 게터 메소드로 userDTO 데이터를 JSON 타입으로 SharedPreferences에 저장
+                                Gson gson = new Gson();
+                                String userInfo = gson.toJson(authResponse.get_user());
+                                Log.i("userInfo", userInfo);
+                                editor.putString("userInfo", userInfo);
                                 editor.apply();
                                 set_retrofit.set_context(getApplicationContext());
                                 Log.i("Login", "Success");
