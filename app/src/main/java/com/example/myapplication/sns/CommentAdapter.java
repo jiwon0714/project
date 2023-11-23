@@ -22,6 +22,9 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
         this.comments = comment;
     }
 
+    private int click = 0;
+    private int numofheart =0;
+
     @NonNull
     @Override
     public com.example.myapplication.sns.CommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,13 +40,26 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
 
         holder.tv_comment.setText(comment.getcommentContext());
         holder.tv_CommentTime.setText(comment.getcommentTime());
-        holder.profile.setImageBitmap(comment.getProfileImage());
-        holder.name.setText(comment.getname());
-        holder.heartCount.setText(comment.getHeartCount());
+//        holder.profile.setImageBitmap(comment.getProfileImage());
+//        holder.name.setText(comment.getname());
+        holder.heartCounter.setText(String.valueOf(comment.getHeartCount())); // Convert int to String
 
-        if (comment.isHeart()) {
-            holder.heart.setImageResource(R.drawable.fillheart);
-        }
+        holder.heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(click ==0) {
+                    holder.heart.setImageResource(R.drawable.fillheart);
+                    numofheart++;
+                    holder.heartCounter.setText(numofheart);
+                    click ++;
+                }else{
+                    holder.heart.setImageResource(R.drawable.heart);
+                    --numofheart;
+                    holder.heartCounter.setText(numofheart);
+                    click --;
+                }
+            }
+        });
     }
 
     @Override
@@ -53,8 +69,9 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
 
     public void addComment(Comment_Item comment) {
         comments.add(comment);
-        notifyDataSetChanged();
+        notifyItemInserted(comments.size() - 1); // Notify only the inserted position
     }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -66,7 +83,7 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
 
         ImageView heart;
 
-        TextView heartCount;
+        TextView heartCounter;
 
 
 
@@ -76,8 +93,10 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
             tv_comment = view.findViewById(R.id.tv_Comment);
             tv_CommentTime = view.findViewById(R.id.comment_time);
             name = view.findViewById(R.id.comment_name);
+
+
             heart = view.findViewById(R.id.heart);
-            heartCount = view.findViewById(R.id.heartCount);
+            heartCounter = view.findViewById(R.id.heartCount);
 
         }
     }

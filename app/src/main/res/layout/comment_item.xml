@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -53,7 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/idbar"
-        android:layout_marginTop="3dp"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/profile"
         android:layout_toLeftOf="@id/heartbar"
@@ -83,14 +83,10 @@
             android:text="1"
             android:gravity="center"
             android:textStyle="bold"
+            android:textSize="30dp"
             />
 
     </LinearLayout>
-
-
-
-
-
 
 
 </RelativeLayout>

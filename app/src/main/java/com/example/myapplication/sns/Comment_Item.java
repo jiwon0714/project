@@ -4,17 +4,17 @@ import android.graphics.Bitmap;
 
 public class Comment_Item {
 
-    private Bitmap profileImage;
-    private String name;
+//    private Bitmap profileImage;
+//    private String name;
     private String commentContext;
     private String commentTime;
     private boolean isHeart;
 
     private int heartCount;
 
-    public Comment_Item(Bitmap profileImage, String name, String commentContext, String commentTime) {
-        this.profileImage = profileImage;
-        this.name = name;
+    public Comment_Item( String commentContext, String commentTime) {
+//        this.profileImage = profileImage;
+//        this.name = name;
         this.commentContext = commentContext;
         this.commentTime = commentTime;
         this.isHeart = false;
@@ -22,10 +22,10 @@ public class Comment_Item {
     }
 
 
-    public Bitmap getProfileImage(){return profileImage;}
-    public String getname() {
-        return name;
-    }
+//    public Bitmap getProfileImage(){return profileImage;}
+//    public String getname() {
+//        return name;
+//    }
     public String getcommentContext() {
         return commentContext;
     }
