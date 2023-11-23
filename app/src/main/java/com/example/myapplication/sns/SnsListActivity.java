@@ -114,6 +114,10 @@ public class SnsListActivity extends AppCompatActivity {
                 // 네트워크 오류 또는 서버 응답 실패 시 처리
             }
         });
+
+
+
+
     }
     private Bitmap base64ToBitmap(String base64String) {
         byte[] decodedBytes = Base64.decode(base64String, Base64.DEFAULT);

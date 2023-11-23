@@ -36,7 +36,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegisterActivity extends AppCompatActivity {
 
     TextView back;
-    EditText name,id,pw,repw,email,birthday;
+    EditText id,pw,repw,email,birthday;
+    EditText name;
     Button pwcheck, submit, btn_profile_set;
     Boolean checkPW = false;
 
@@ -105,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
                 UserDTO userDTO = new UserDTO(id.getText().toString(), name.getText().toString(), email.getText().toString(), pw.getText().toString(),birthday.getText().toString());
                 // cmd-ipconfig ipv4 주소로 바꾸기
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.245.184:8080/demo/")
+                        .baseUrl("http://192.168.219.105:8080/demo/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api = retrofit.create(Api.class);

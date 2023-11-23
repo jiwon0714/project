@@ -27,6 +27,9 @@ public class List_FriendItem {
         this.message = message;
     }
 
+
+
+
     public void setName(String name) {
         this.name = name;
     }

@@ -258,24 +258,6 @@ public class DiaryActivity extends AppCompatActivity {
                 }
 
 
-                // 확인 버튼에 스타일 적용
-                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                        // 확인 버튼 스타일 설정
-                        Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-                        positiveButton.setTextColor(getResources().getColor(R.color.white));
-                        positiveButton.setBackgroundColor(getResources().getColor(R.color.green));
-                        positiveButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-                        positiveButton.setTypeface(null, Typeface.BOLD);
-
-                        // 취소 버튼 스타일 설정
-                        Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                        negativeButton.setTextColor(getResources().getColor(R.color.green)); // 원하는 색상으로 변경
-                        negativeButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-                        negativeButton.setTypeface(null, Typeface.BOLD);
-                    }
-                });
 
                 // 다이얼로그 표시
                 alertDialog.show();

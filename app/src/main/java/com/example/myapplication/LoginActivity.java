@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 // cmd-ipconfig ipv4 주소로 바꾸기
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.245.184:8080/demo/")
+                        .baseUrl("http://192.168.219.105:8080/demo/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
