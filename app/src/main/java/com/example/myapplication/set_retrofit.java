@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class set_retrofit {
     private static Retrofit retrofit = null;
     // cmd-ipconfig ipv4 주소로 바꾸기
-    private static final String BASE_URL = "http://192.168.0.79:8080/demo/";
+    private static final String BASE_URL = "http://192.168.245.184:8080/demo/";
     private static Context context;
     private static SharedPreferences prefs;
     private static String jwtToken;

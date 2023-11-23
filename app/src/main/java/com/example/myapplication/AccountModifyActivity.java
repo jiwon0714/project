@@ -1,25 +1,36 @@
 package com.example.myapplication;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.Diary_Calender.DiaryFileManager;
 import com.example.myapplication.controller.Api;
 import com.example.myapplication.dto.UserDTO;
 import com.google.gson.Gson;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,13 +39,19 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AccountModifyActivity extends AppCompatActivity {
+
+
     EditText name,id,pw,repw,email,birthday;
 
-    Button pwcheck, save;
+
+    CircleImageView profile;
+    Button pwcheck, save,btn_profile_modify;
 
     boolean checkPW = false;
 
     private Api api;
+
+    private static final int REQUEST_IMAGE_PICK = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,19 +92,23 @@ public class AccountModifyActivity extends AppCompatActivity {
             }
         });
 
-        if (!TextUtils.isEmpty(userInfo)) {
-            Gson gson = new Gson();
-            UserDTO user = gson.fromJson(userInfo, UserDTO.class);
-            name.setText(user.getName());
-            id.setText(user.getId());
-            birthday.setText(user.getDate());
-            email.setText(user.getEmail());
-            Log.i("userInfo", user.getName());
-            Log.i("userInfo", user.getId());
-            Log.i("userInfo", user.getDate());
-            Log.i("userInfo", user.getEmail());
+        //이거 주석 처리 안 하면 오류남
+//
+//        if (!TextUtils.isEmpty(userInfo)) {
+//            Gson gson = new Gson();
+//            UserDTO user = gson.fromJson(userInfo, UserDTO.class);
+//            name.setText(user.getName());
+//            id.setText(user.getId());
+//            birthday.setText(user.getDate());
+//            email.setText(user.getEmail());
+//            Log.i("userInfo", user.getName());
+//            Log.i("userInfo", user.getId());
+//            Log.i("userInfo", user.getDate());
+//            Log.i("userInfo", user.getEmail());
+//
+//        }else{Log.i("userInfo", userInfo);}
 
-        }else{Log.i("userInfo", userInfo);}
+
 
         save.setOnClickListener(v -> {
 //            if(name.length() == 0){
@@ -137,7 +158,42 @@ public class AccountModifyActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+
+
+        btn_profile_modify = findViewById(R.id.btn_profile_modify);
+        profile = findViewById(R.id.profile);
+
+        btn_profile_modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "사진을 선택해 주세요.", Toast.LENGTH_LONG).show();
+
+                openGallery();
+            }
+        });
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_IMAGE_PICK);
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            try {
+                InputStream imageStream = getContentResolver().openInputStream(selectedImageUri);
+                Bitmap selectedImageBitmap = BitmapFactory.decodeStream(imageStream);
+
+
+                profile.setImageBitmap(selectedImageBitmap);
+
+            } catch (FileNotFoundException e) {
+                Log.e("AccountModifyActivity", "선택한 이미지 로드 중 오류 발생", e);
+            }
+        }
+    }
 }

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myapplication.dto.UserDTO;
@@ -16,7 +17,8 @@ import com.google.gson.Gson;
 
 public class AccountActivity extends AppCompatActivity {
 
-    TextView check, modify;
+    TextView check;
+    Button modify;
     TextView name, id, birthday, email;
 
     @Override
