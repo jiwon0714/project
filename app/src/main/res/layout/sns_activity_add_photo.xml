@@ -53,7 +53,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"/>
         <TextView
-            android:text="User name"
+            android:text="User_name"
             android:id="@+id/tv_profile"
             android:textSize="30dp"
             android:fontFamily="@font/soyo_maple"

@@ -65,8 +65,9 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
 
         void onBind(SnsItem item){
             Bitmap mainImageBitmap = item.getResourceId_main_image();
+            Bitmap profileImageBitmap = item.getResourceId_profile();
 
-            profile.setImageResource(R.drawable.pinokio_circle);
+            profile.setImageBitmap(profileImageBitmap);
             main_image.setImageBitmap(mainImageBitmap);
 
             name.setText(item.getName());

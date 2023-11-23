@@ -28,5 +28,8 @@ public interface Api {
 
     @POST("login")
     Call<AuthResponse> login(@Body LoginRequest loginRequest);
+
+    @POST("modify")
+    Call <ResponseBody> modifyUser(@Body UserDTO userDTO);
 }
 

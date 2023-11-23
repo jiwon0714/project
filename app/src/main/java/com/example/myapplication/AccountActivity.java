@@ -44,18 +44,20 @@ public class AccountActivity extends AppCompatActivity {
         newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
-        Context context = set_retrofit.get_context();
-        SharedPreferences prefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String userInfo = prefs.getString("userInfo", "");
+        if(set_retrofit.get_context()!=null){
+            Context context = set_retrofit.get_context();
+            SharedPreferences prefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            String userInfo = prefs.getString("userInfo", "");
+            if (!TextUtils.isEmpty(userInfo)) {
+                Gson gson = new Gson();
+                UserDTO user = gson.fromJson(userInfo, UserDTO.class);
+                name.setText(user.getName());
+                id.setText(user.getId());
+                birthday.setText(user.getDate());
+                email.setText(user.getEmail());
+            }else{Log.i("userInfo", userInfo);}
+        }
 
-        if (!TextUtils.isEmpty(userInfo)) {
-            Gson gson = new Gson();
-            UserDTO user = gson.fromJson(userInfo, UserDTO.class);
-            name.setText(user.getName());
-            id.setText(user.getId());
-            birthday.setText(user.getDate());
-            email.setText(user.getEmail());
-        }else{Log.i("userInfo", userInfo);}
 
         check.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +75,4 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

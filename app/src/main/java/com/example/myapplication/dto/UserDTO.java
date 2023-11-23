@@ -8,7 +8,7 @@ public class UserDTO {
     private String name;
     private String email;
     private String password;
-
+    private String profileImg;
     private String date;
 
     public UserDTO(String id, String name, String email, String password, String date){
@@ -19,6 +19,7 @@ public class UserDTO {
         this.date = date;
     }
 
+    public void setProfileImg(String profileImg) { this.profileImg = profileImg; }
     public Integer getIdentifier() {
         return identifier;
     }
@@ -35,11 +36,17 @@ public class UserDTO {
         return password;
     }
 
+    public String getProfileImg() { return this.profileImg; }
+
     public String getEmail() {
         return email;
     }
 
     public String getDate() {
         return date;
+    }
+
+    public void setIdentifier(Integer identifier) {
+        this.identifier = identifier;
     }
 }
