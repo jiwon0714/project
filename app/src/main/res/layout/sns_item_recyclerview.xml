@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="10dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -10,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/add"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center_vertical">
 
         <ImageView
@@ -96,43 +98,13 @@
         android:fontFamily="@font/soyo_maple"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:layout_below="@+id/sns_main">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/commentCounter"
+        android:textSize="25dp"
+        android:text="댓글 0개"
+        android:fontFamily="@font/soyo_maple"
+        />
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/chat2" />
-
-        <TextView
-            android:id="@+id/comment_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="이름"
-            android:textSize="30dp"
-            android:fontFamily="@font/soyo_maple" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text=" : "
-            android:textSize="30dp"
-            android:fontFamily="@font/soyo_maple"
-            />
-
-        <TextView
-            android:id="@+id/comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="댓글"
-            android:fontFamily="@font/soyo_maple"
-            android:textSize="30dp"
-            />
-    </LinearLayout>
 </LinearLayout>

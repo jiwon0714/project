@@ -75,9 +75,6 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
 
 
 
-
-
-
         //댓글창
         holder.chat_to_comment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,8 +215,6 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            comment_name = (TextView) itemView.findViewById(R.id.comment_name);
-            comment = (TextView) itemView.findViewById(R.id.comment);
             main_image = (ImageView) itemView.findViewById(R.id.main_image);
             heart = (ImageView) itemView.findViewById(R.id.heart);
             profile = (ImageView) itemView.findViewById(R.id.img_profile);
@@ -237,8 +232,7 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
 
             name.setText(item.getName());
             text.setText(item.getText());
-            comment.setText(item.getComment());
-            comment_name.setText(item.getComment_name());
+
         }
     }
 }

@@ -21,8 +21,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.controller.Api;
 import com.example.myapplication.dto.UserDTO;
-import com.example.myapplication.sns.AddPhotoActivity;
-import com.example.myapplication.sns.SnsListActivity;
+
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
