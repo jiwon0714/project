@@ -45,6 +45,9 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
         holder.heartCounter.setText(String.valueOf(comment.getHeartCount())); // Convert int to String
 
         holder.heart.setOnClickListener(new View.OnClickListener() {
+
+
+            //여긴 boolean으로 처리할 건지 확인 해야함
             @Override
             public void onClick(View v) {
                 if(click ==0) {

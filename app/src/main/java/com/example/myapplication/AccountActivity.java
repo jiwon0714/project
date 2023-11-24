@@ -2,24 +2,39 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.dto.UserDTO;
 import com.google.gson.Gson;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AccountActivity extends AppCompatActivity {
 
     TextView check;
-    Button modify;
+    Button modify,btn_profile_modify;
     TextView name, id, birthday, email;
+    CircleImageView profile;
+
+    private static final int REQUEST_IMAGE_PICK = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +89,41 @@ public class AccountActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn_profile_modify = findViewById(R.id.btn_profile_modify);
+        profile = findViewById(R.id.profile);
+
+        btn_profile_modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "사진을 선택해 주세요.", Toast.LENGTH_LONG).show();
+
+                openGallery();
+            }
+        });
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_IMAGE_PICK);
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            try {
+                InputStream imageStream = getContentResolver().openInputStream(selectedImageUri);
+                Bitmap selectedImageBitmap = BitmapFactory.decodeStream(imageStream);
+
+
+                profile.setImageBitmap(selectedImageBitmap);
+
+            } catch (FileNotFoundException e) {
+                Log.e("AccountModifyActivity", "선택한 이미지 로드 중 오류 발생", e);
+            }
+        }
+    }
 }
