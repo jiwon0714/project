@@ -56,6 +56,7 @@ public class AddPhotoActivity extends AppCompatActivity {
 
     String bitmapProfile;
     private Api api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

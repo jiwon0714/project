@@ -1,7 +1,13 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +22,12 @@ import androidx.fragment.app.DialogFragment;
 import com.example.myapplication.controller.Api;
 import com.example.myapplication.dto.UserDTO;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,11 +38,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegisterActivity extends AppCompatActivity {
 
     TextView back;
-    EditText name,id,pw,repw,email,birthday;
-    Button pwcheck, submit;
+    EditText id,pw,repw,email,birthday;
+    EditText name;
+    Button pwcheck, submit, btn_profile_set;
     Boolean checkPW = false;
 
+    CircleImageView profile;
+
+    private String profileImg;
+
     private Api api;
+
+    private static final int REQUEST_IMAGE_PICK = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,14 +108,13 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "비밀번호를 확인해주세요.", Toast.LENGTH_LONG).show();
             }else{
                 UserDTO userDTO = new UserDTO(id.getText().toString(), name.getText().toString(), email.getText().toString(), pw.getText().toString(),birthday.getText().toString());
-                // cmd-ipconfig ipv4 주소로 바꾸기
+                userDTO.setProfileImg(profileImg);
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.0.105:8080/demo/")
+                        .baseUrl("http://192.168.0.85:8080/demo/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api = retrofit.create(Api.class);
                 Call<ResponseBody> call = api.addNewUser(userDTO);
-
                 call.clone().enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -131,5 +148,49 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        btn_profile_set = findViewById(R.id.btn_profile_set);
+        profile = findViewById(R.id.profile);
+
+        btn_profile_set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "사진을 선택해 주세요.", Toast.LENGTH_LONG).show();
+
+                openGallery();
+            }
+        });
+
+
+
+
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_IMAGE_PICK);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            try {
+                InputStream imageStream = getContentResolver().openInputStream(selectedImageUri);
+                Bitmap selectedImageBitmap = BitmapFactory.decodeStream(imageStream);
+                profile.setImageBitmap(selectedImageBitmap);
+                profileImg = bitmap_to_base64(selectedImageBitmap);
+            } catch (FileNotFoundException e) {
+                Log.e("AccountModifyActivity", "선택한 이미지 로드 중 오류 발생", e);
+            }
+        }
+    }
+
+    private String bitmap_to_base64 (Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }
