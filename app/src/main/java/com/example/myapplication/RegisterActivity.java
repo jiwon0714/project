@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.myapplication.controller.Api;
 import com.example.myapplication.dto.UserDTO;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
     Boolean checkPW = false;
 
     CircleImageView profile;
+
+    private String profileImg;
 
     private Api api;
 
@@ -104,14 +108,13 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "비밀번호를 확인해주세요.", Toast.LENGTH_LONG).show();
             }else{
                 UserDTO userDTO = new UserDTO(id.getText().toString(), name.getText().toString(), email.getText().toString(), pw.getText().toString(),birthday.getText().toString());
-                // cmd-ipconfig ipv4 주소로 바꾸기
+                userDTO.setProfileImg(profileImg);
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("http://192.168.219.105:8080/demo/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api = retrofit.create(Api.class);
                 Call<ResponseBody> call = api.addNewUser(userDTO);
-
                 call.clone().enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -176,13 +179,18 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 InputStream imageStream = getContentResolver().openInputStream(selectedImageUri);
                 Bitmap selectedImageBitmap = BitmapFactory.decodeStream(imageStream);
-
-
                 profile.setImageBitmap(selectedImageBitmap);
-
+                profileImg = bitmap_to_base64(selectedImageBitmap);
             } catch (FileNotFoundException e) {
                 Log.e("AccountModifyActivity", "선택한 이미지 로드 중 오류 발생", e);
             }
         }
+    }
+
+    private String bitmap_to_base64 (Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }

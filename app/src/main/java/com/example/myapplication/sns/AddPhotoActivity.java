@@ -5,25 +5,34 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Navi;
 import com.example.myapplication.R;
 import com.example.myapplication.controller.Api;
 import com.example.myapplication.dto.ImageDTO;
+import com.example.myapplication.dto.UserDTO;
 import com.example.myapplication.set_retrofit;
+import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -42,7 +51,12 @@ public class AddPhotoActivity extends AppCompatActivity {
     ImageButton btn_camera, btn_sns, btn_home, btn_paint, btn_chat, btn_diary;
     Button btn_upload;
     EditText editText;
+    TextView userName;
+    ImageView profileImg;
+
+    String bitmapProfile;
     private Api api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +85,29 @@ public class AddPhotoActivity extends AppCompatActivity {
         // btn_camera = findViewById(R.id.btn_camera);
         btn_paint = findViewById(R.id.btn_paint);
         btn_diary = findViewById(R.id.btn_diary);
-
+        userName = findViewById(R.id.tv_profile);
         btn_upload = findViewById(R.id.btn_upload);
+        profileImg = findViewById(R.id.img_profile);
 
         Navi navi = new Navi(this); // 'this'는 현재 액티비티의 Context를 나타냅니다.
         navi.setImageButtonListeners(btn_home, btn_chat, btn_sns, btn_camera, btn_paint, btn_diary);
 
         mainimage = findViewById(R.id.mainimage);
         editText = findViewById(R.id.et_content);
+
+        if(set_retrofit.get_context()!=null){
+            Context context = set_retrofit.get_context();
+            SharedPreferences prefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            String userInfo = prefs.getString("userInfo", "");
+            if (!TextUtils.isEmpty(userInfo)) {
+                Gson gson = new Gson();
+                UserDTO user = gson.fromJson(userInfo, UserDTO.class);
+                userName.setText(user.getName());
+                profileImg.setImageBitmap(base64ToBitmap(user.getProfileImg()));
+                imageDTO.setProfileImg(user.getProfileImg());
+                Log.i("getProfileImg", user.getProfileImg());
+            }else{Log.i("userInfo", userInfo);}
+        }
 
         imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -173,5 +202,10 @@ public class AddPhotoActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+    private Bitmap base64ToBitmap(String base64String) {
+        byte[] decodedBytes = Base64.decode(base64String, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 }

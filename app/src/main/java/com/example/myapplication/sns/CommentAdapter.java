@@ -88,8 +88,6 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
 
         TextView heartCounter;
 
-
-
         public ViewHolder(View view) {
             super(view);
             profile = view.findViewById(R.id.profile);

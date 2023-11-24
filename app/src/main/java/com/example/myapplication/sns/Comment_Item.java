@@ -22,7 +22,7 @@ public class Comment_Item {
     }
 
 
-//    public Bitmap getProfileImage(){return profileImage;}
+    //    public Bitmap getProfileImage(){return profileImage;}
 //    public String getname() {
 //        return name;
 //    }

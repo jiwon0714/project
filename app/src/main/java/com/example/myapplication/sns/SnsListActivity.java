@@ -21,6 +21,7 @@ import com.example.myapplication.set_retrofit;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,8 +43,6 @@ public class SnsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sns_activity_sns_list);
 
-
-
         int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
         int newUiOptions = uiOptions;
         boolean isImmersiveModeEnabled = ((uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) == uiOptions);
@@ -56,7 +55,6 @@ public class SnsListActivity extends AppCompatActivity {
         newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
         newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
-
 
         add = findViewById(R.id.add);
 
@@ -98,10 +96,11 @@ public class SnsListActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     List<ImageDTO> imageList = response.body();
                     for (ImageDTO post : imageList) {
-                        Bitmap bitmap = base64ToBitmap(post.getImg());
-                        mSnsItems.add(new SnsItem(bitmap, post.getOwner(), bitmap, post.getTxt(),"댓글", "댓글"));
+                        Bitmap mainImg = base64ToBitmap(post.getImg());
+                        Bitmap profileImg = base64ToBitmap(post.getProfileImg());
+                        mSnsItems.add(new SnsItem(profileImg, post.getOwner(), mainImg, post.getTxt(),"댓글", "댓글"));
                     }
-
+                    Collections.reverse(mSnsItems);
                 } else {
                     System.out.println("Error");
                 }
