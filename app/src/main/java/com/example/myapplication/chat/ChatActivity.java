@@ -82,9 +82,8 @@ public class ChatActivity extends AppCompatActivity {
                 if (!messageContent.isEmpty()) {
                     // 현재 시간을 간단한 형식으로 가져오기
                     String timestamp = getCurrentTimestamp();
-                    ChatMessage newMessage = new ChatMessage(messageContent, timestamp);
-
-                    // 어댑터에 메시지 추가
+                    ChatMessage newMessage = new ChatMessage(messageContent, timestamp, true, 1); // 어댑터에 메시지 추가
+                    receiveMessage();
                     chatAdapter.addMessage(newMessage);
 
                     // 입력 필드 비우기
@@ -92,8 +91,28 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+        // 액티비티가 시작될 때 모든 메시지를 읽은 것으로 표시
+        markAllMessagesAsRead();
     }
 
+    private void receiveMessage() {
+        // 메시지를 받았다고 가정
+        String receivedMessageContent = "안녕하세요! 받은 메시지입니다.";
+        String timestamp = getCurrentTimestamp();
+        ChatMessage receivedMessage = new ChatMessage(receivedMessageContent, timestamp, false, 2); // false는 발신 여부를 나타냄
+
+        // 어댑터에 메시지 추가
+        chatAdapter.addMessage(receivedMessage);
+    }
+
+    private void markAllMessagesAsRead() {
+        for (int i = 0; i < messageList.size(); i++) {
+            markMessageAsRead(i);
+        }
+    }
 
     private String getCurrentTimestamp() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());

@@ -3,18 +3,16 @@ package com.example.myapplication.chat;
 public class ChatMessage {
     private String messageContent;
     private String timestamp;
-    private boolean isRead; // 읽음 상태를 나타내는 필드 추가
-    private boolean isSent; // 발신 여부를 나타내는 필드 추가
-
+    private boolean isRead;
+    private boolean isSent;
     private int viewType;
 
-    public ChatMessage(String messageContent, String timestamp) {
+    public ChatMessage(String messageContent, String timestamp, boolean isSent, int viewType) {
         this.messageContent = messageContent;
         this.timestamp = timestamp;
-        this.isRead = false; // 초기값은 읽지 않음
+        this.isRead = false;
         this.isSent = isSent;
         this.viewType = viewType;
-
     }
 
     public String getMessageContent() {
@@ -28,10 +26,13 @@ public class ChatMessage {
     public boolean isRead() {
         return isRead;
     }
-    public boolean isSent() {return isSent;}
 
     public void setRead(boolean read) {
         isRead = read;
+    }
+
+    public boolean isSent() {
+        return isSent;
     }
 
     public int getViewType() {

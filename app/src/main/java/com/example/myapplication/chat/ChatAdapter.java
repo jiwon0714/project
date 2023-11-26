@@ -42,7 +42,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             View sentView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_list_talk_item_mine, parent, false);
             return new SentMessageViewHolder(sentView);
         } else {
-            View receivedView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_list_talk_item_mine, parent, false);
+            View receivedView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_list_talk_item_other, parent, false);
             return new ReceivedMessageViewHolder(receivedView);
         }
         //return new ViewHolder(view);
