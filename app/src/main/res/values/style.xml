@@ -41,10 +41,6 @@
 
 </style>
 
-    <style name="AnimationPopupStyle">
-        <item name="android:windowEnterAnimation">@anim/open</item>
-        <item name="android:windowExitAnimation">@anim/close</item>
-    </style>
 
     <!-- styles.xml -->
     <style name="FullScreenDialog" parent="Theme.AppCompat.Light.Dialog">

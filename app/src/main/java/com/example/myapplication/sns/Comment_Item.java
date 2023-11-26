@@ -9,16 +9,15 @@ public class Comment_Item {
     private String commentContext;
     private String commentTime;
     private boolean isHeart;
-
     private int heartCount;
 
-    public Comment_Item( String commentContext, String commentTime) {
+    public Comment_Item( String commentContext, String commentTime, boolean isHeart, int heartCount) {
 //        this.profileImage = profileImage;
 //        this.name = name;
         this.commentContext = commentContext;
         this.commentTime = commentTime;
-        this.isHeart = false;
-        this.heartCount = 0;
+        this.isHeart = isHeart;
+        this.heartCount = heartCount;
     }
 
 
@@ -35,9 +34,11 @@ public class Comment_Item {
     public boolean isHeart() {return isHeart;}
     public int getHeartCount(){return heartCount;}
 
+    public void setHeartCount(int heartCount) {
+        this.heartCount = heartCount;
+    }
 
-
-    public void setHeart(boolean doHeart) {
-        isHeart = doHeart;
+    public void setHeart(boolean heart) {
+        isHeart = heart;
     }
 }

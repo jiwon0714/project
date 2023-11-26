@@ -173,10 +173,11 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
             // CircleImageView profileImage = ...
             // String name = ...
 
-            Comment_Item newComment = new Comment_Item(commentContext, commentTime);
+            Comment_Item newComment = new Comment_Item(commentContext, commentTime,false, 0);
 
             // 어댑터에 메시지 추가
             adapter.addComment(newComment);
+            adapter.notifyDataSetChanged(); // 댓글이 추가되었음을 어댑터에 알림
 
             // 입력 필드 비우기
             et_comment.setText("");

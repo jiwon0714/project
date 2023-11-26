@@ -44,26 +44,46 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
 //        holder.name.setText(comment.getname());
         holder.heartCounter.setText(String.valueOf(comment.getHeartCount())); // Convert int to String
 
+//        holder.heart.setOnClickListener(new View.OnClickListener() {
+//
+//
+//            //여긴 boolean으로 처리할 건지 확인 해야함
+//            @Override
+//            public void onClick(View v) {
+//                if(click ==0) {
+//                    holder.heart.setImageResource(R.drawable.fillheart);
+//                    numofheart++;
+//                    holder.heartCounter.setText(numofheart);
+//                    click ++;
+//                }else{
+//                    holder.heart.setImageResource(R.drawable.heart);
+//                    --numofheart;
+//                    holder.heartCounter.setText(numofheart);
+//                    click --;
+//                }
+//            }
+//        });
+
         holder.heart.setOnClickListener(new View.OnClickListener() {
-
-
-            //여긴 boolean으로 처리할 건지 확인 해야함
             @Override
             public void onClick(View v) {
-                if(click ==0) {
+                if (!comment.isHeart()) {
+                    // 좋아요를 클릭한 경우
+                    comment.setHeart(true);
+                    comment.setHeartCount(comment.getHeartCount() + 1);
                     holder.heart.setImageResource(R.drawable.fillheart);
-                    numofheart++;
-                    holder.heartCounter.setText(numofheart);
-                    click ++;
-                }else{
+                } else {
+                    // 좋아요를 취소한 경우
+                    comment.setHeart(false);
+                    comment.setHeartCount(comment.getHeartCount() - 1);
                     holder.heart.setImageResource(R.drawable.heart);
-                    --numofheart;
-                    holder.heartCounter.setText(numofheart);
-                    click --;
                 }
+
+                holder.heartCounter.setText(String.valueOf(comment.getHeartCount()));
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -81,11 +101,8 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
         CircleImageView profile;
         TextView tv_comment;
         TextView tv_CommentTime;
-
         TextView name;
-
         ImageView heart;
-
         TextView heartCounter;
 
         public ViewHolder(View view) {
@@ -94,8 +111,6 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
             tv_comment = view.findViewById(R.id.tv_Comment);
             tv_CommentTime = view.findViewById(R.id.comment_time);
             name = view.findViewById(R.id.comment_name);
-
-
             heart = view.findViewById(R.id.heart);
             heartCounter = view.findViewById(R.id.heartCount);
 
