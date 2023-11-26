@@ -66,15 +66,16 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottombar"
         android:layout_below="@+id/bar2"
-        android:layout_marginBottom="100dp"
         android:layout_marginTop="20dp" />
 
     <LinearLayout
         android:id="@+id/bottombar"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
 
@@ -94,7 +95,7 @@
             android:layout_weight="1"
             android:layout_height="70dp"
             android:adjustViewBounds="true"
-            android:background="@color/white"
+            android:background="#00FFFFFF"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/diary" />
 
@@ -127,6 +128,7 @@
             android:background="#00FFFFFF"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/message" />
+
 
     </LinearLayout>
 

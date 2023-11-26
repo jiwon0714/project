@@ -70,7 +70,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="999dp"
+        android:layout_height="match_parent"
         android:layout_above="@+id/bottombar"
         android:layout_below="@+id/tv"
          />
@@ -87,11 +87,13 @@
 
 
     <LinearLayout
+        android:id="@+id/bottombar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
 
@@ -144,8 +146,6 @@
             android:background="#00FFFFFF"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/message" />
-
-
 
     </LinearLayout>
 
