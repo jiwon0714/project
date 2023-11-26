@@ -37,7 +37,7 @@
             android:id="@+id/upload_date"
             android:textSize="24dp"
             android:text="2023-11-23"
-            android:layout_marginLeft="300dp"
+            android:layout_marginLeft="350dp"
             android:fontFamily="@font/soyo_maple"
             />
     </LinearLayout>

@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.RegisterActivity;
+import com.example.myapplication.TimeAgoUtil;
 import com.example.myapplication.chat.ChatMessage;
 
 import java.text.SimpleDateFormat;
@@ -55,6 +56,15 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.onBind(mSnsList.get(position));
+
+
+        SnsItem sns = mSnsList.get(position);
+
+        // 업로드된 시간을 getTimeAgo 메소드에 전달
+        String timeAgo = TimeAgoUtil.getTimeAgo(sns.getUploadDate());
+        holder.uploadDate.setText(timeAgo);
+
+
 
         holder.heart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,8 +217,8 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
         ImageView main_image;
         TextView name;
         TextView text;
-        TextView comment;
-        TextView comment_name;
+        TextView uploadDate;
+
         ImageView heart;
         ImageView chat_to_comment;
         TextView heartCounter;
@@ -221,6 +231,7 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
             profile = (ImageView) itemView.findViewById(R.id.img_profile);
             name = (TextView) itemView.findViewById(R.id.tv_profile);
             text = (TextView) itemView.findViewById(R.id.sns_main);
+            uploadDate = (TextView) itemView.findViewById(R.id.upload_date);
             chat_to_comment = (ImageView) itemView.findViewById(R.id.chat);
             heartCounter = (TextView)  itemView.findViewById(R.id.favoritecounter);
         }
@@ -230,7 +241,7 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
 
             profile.setImageResource(R.drawable.pinokio_circle);
             main_image.setImageBitmap(mainImageBitmap);
-
+            uploadDate.setText(item.getUploadDate());
             name.setText(item.getName());
             text.setText(item.getText());
 

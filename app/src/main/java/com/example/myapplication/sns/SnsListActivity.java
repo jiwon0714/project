@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 
 import com.example.myapplication.Navi;
 import com.example.myapplication.R;
+import com.example.myapplication.TimeAgoUtil;
 import com.example.myapplication.controller.Api;
 import com.example.myapplication.dto.ImageDTO;
 import com.example.myapplication.set_retrofit;
@@ -98,7 +99,8 @@ public class SnsListActivity extends AppCompatActivity {
                     for (ImageDTO post : imageList) {
                         Bitmap mainImg = base64ToBitmap(post.getImg());
                         Bitmap profileImg = base64ToBitmap(post.getProfileImg());
-                        mSnsItems.add(new SnsItem(profileImg, post.getOwner(), mainImg, post.getTxt(),"댓글", "댓글"));
+
+                        mSnsItems.add(new SnsItem(profileImg, post.getOwner(), mainImg, post.getTxt(),"방금전"));
                     }
                     Collections.reverse(mSnsItems);
                 } else {

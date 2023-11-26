@@ -216,8 +216,7 @@ public class PaintActivity extends AppCompatActivity {
         myView.mPaint.setColor(Color.WHITE); // 여기에서는 흰색을 배경색으로 사용
         myView.mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 
-        btnThickness.setImageResource(R.drawable.brush);
-        btnEraser.setImageResource(R.drawable.eraser_toggle);
+
 
     }
 
@@ -227,8 +226,6 @@ public class PaintActivity extends AppCompatActivity {
         myView.mPaint.setColor(selectedColor);
         myView.mPaint.setXfermode(null);
 
-        btnThickness.setImageResource(R.drawable.brush_toggle);
-        btnEraser.setImageResource(R.drawable.eraser);
 
     }
 

@@ -10,11 +10,14 @@ public class SnsItem {
     Bitmap resourceId_profile;
     Bitmap resourceId_main_image;
 
-    public SnsItem(Bitmap resourceId_profile, String name, Bitmap resourceId_main_image, String text, String comment_name, String comment ) {
+    String uploadDate;
+
+    public SnsItem(Bitmap resourceId_profile, String name, Bitmap resourceId_main_image, String text, String uploadDate ) {
         this.name = name;
         this.text= text;
         this.resourceId_profile = resourceId_profile;
         this.resourceId_main_image = resourceId_main_image;
+        this.uploadDate = uploadDate;
 
     }
 
@@ -34,9 +37,11 @@ public class SnsItem {
         return name;
     }
 
+    public String getUploadDate() {
+        return uploadDate;
+    }
 
-
-
+    public void setUploadDate(String uploadDate) {this.uploadDate = uploadDate;}
 
     public void setText(String text) {
         this.text = text;
