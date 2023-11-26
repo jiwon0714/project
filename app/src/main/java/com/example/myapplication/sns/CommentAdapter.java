@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.example.myapplication.TimeAgoUtil;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +44,11 @@ public class CommentAdapter extends RecyclerView.Adapter<com.example.myapplicati
 //        holder.profile.setImageBitmap(comment.getProfileImage());
 //        holder.name.setText(comment.getname());
         holder.heartCounter.setText(String.valueOf(comment.getHeartCount())); // Convert int to String
+
+
+        // 댓글이 달린 시간을 "몇 분 전" 형식으로 변환하여 설정
+        String timeAgo = TimeAgoUtil.getTimeAgo(comment.getcommentTime());
+        holder.tv_CommentTime.setText(timeAgo);
 
 //        holder.heart.setOnClickListener(new View.OnClickListener() {
 //
