@@ -26,6 +26,7 @@ public class List_FriendItem {
     public String getName() {
         return name;
     }
+    public int getOpp_identifier() { return opp_identifier; }
 
     public void setMessage(String message) {
         this.message = message;
@@ -40,8 +41,8 @@ public class List_FriendItem {
     }
     public String getRoomId() {
         if(identifier > opp_identifier) {
-            return opp_identifier + "/" + identifier;
+            return opp_identifier + "A" + identifier;
         }
-        return identifier + "/" + opp_identifier;
+        return identifier + "A" + opp_identifier;
     }
 }

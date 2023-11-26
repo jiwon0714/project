@@ -3,7 +3,7 @@ package com.example.myapplication.dto;
 import com.google.gson.annotations.SerializedName;
 
 public class UserDTO {
-    private Integer  identifier;
+    private Integer identifier;
     private String id;
     private String name;
     private String email;
@@ -15,4 +15,5 @@ public class UserDTO {
         this.password = password;
         this.email = email;
     }
+    public Integer getIdentifier() { return identifier; }
 }

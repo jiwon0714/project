@@ -86,7 +86,8 @@ public class List_ChatListActivity extends AppCompatActivity {
                 String roomId = mfriendItems.get(pos).getRoomId();
                 Intent intent = new Intent(v.getContext(), ChatActivity.class);
                 intent.putExtra("room_id", roomId);
-                intent.putExtra("opp_name", mfriendItems.get(pos).getName());
+                intent.putExtra("opp_name", mfriendItems.get(pos).getOpp_identifier());
+                intent.putExtra("chat_name", mfriendItems.get(pos).getName());
                 v.getContext().startActivity(intent);
             }
         });

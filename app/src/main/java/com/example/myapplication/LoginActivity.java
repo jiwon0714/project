@@ -69,10 +69,13 @@ public class LoginActivity extends AppCompatActivity {
                             AuthResponse authResponse = response.body();
                             if(authResponse.get_status().equals("201")) {
                                 String jwtToken = response.body().get_token();
+                                UserDTO me = response.body().get_user();
                                 SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", MODE_PRIVATE).edit();
                                 editor.remove("token");
+                                editor.remove("uid");
                                 editor.apply();
                                 editor.putString("token", jwtToken);
+                                editor.putInt("uid", me.getIdentifier());
                                 editor.apply();
                                 set_retrofit.set_context(getApplicationContext());
                                 Log.i("Login", "Success");

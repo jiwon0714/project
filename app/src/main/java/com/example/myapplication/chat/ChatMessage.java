@@ -1,16 +1,19 @@
 package com.example.myapplication.chat;
 
 public class ChatMessage {
+    private Integer idx;
     private String messageContent;
     private String timestamp;
     private boolean isRead; // 읽음 상태를 나타내는 필드 추가
-    private Integer opp_identifier;
+    private Integer writer;
+    private Integer reader;
 
-    public ChatMessage(String messageContent, String timestamp, Integer opp_identifier) {
+    public ChatMessage(String messageContent, String timestamp, Integer writer, Integer reader) {
         this.messageContent = messageContent;
         this.timestamp = timestamp;
         this.isRead = false; // 초기값은 읽지 않음
-        this.opp_identifier = opp_identifier;
+        this.writer = writer;
+        this.reader = reader;
     }
 
     public String getMessageContent() {
@@ -28,5 +31,6 @@ public class ChatMessage {
     public void setRead(boolean read) {
         isRead = read;
     }
-    public Integer getWriter() { return opp_identifier;}
+    public Integer getWriter() { return writer;}
+    public Integer getIdx() { return idx; }
 }
