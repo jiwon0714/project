@@ -46,6 +46,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".chat.ChatAddActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".sns.AddPhotoActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

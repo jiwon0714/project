@@ -14,8 +14,18 @@ import com.example.myapplication.R;
 import java.util.ArrayList;
 
 public class List_ChatRecyclerAdapter extends RecyclerView.Adapter<List_ChatRecyclerAdapter.ViewHolder> {
-
     private ArrayList<List_FriendItem> mFriendList;
+
+    /////////////////// for click event///////////////////
+    private OnItemClickListener itemClickListener;
+    public interface OnItemClickListener{
+        //클릭시 동작할 함수
+        void onItemClick(View v, int pos);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.itemClickListener = listener;
+    }
+    //////////////////////////////////////////////////////
 
     @NonNull
     @Override
@@ -36,7 +46,11 @@ public class List_ChatRecyclerAdapter extends RecyclerView.Adapter<List_ChatRecy
 
     @Override
     public int getItemCount() {
-        return mFriendList.size();
+        try{
+            return mFriendList.size();
+        } catch (NullPointerException e) {
+            return 0;
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -50,6 +64,18 @@ public class List_ChatRecyclerAdapter extends RecyclerView.Adapter<List_ChatRecy
             profile = (ImageView) itemView.findViewById(R.id.profile);
             name = (TextView) itemView.findViewById(R.id.name);
             message = (TextView) itemView.findViewById(R.id.message);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAbsoluteAdapterPosition();
+                    if (pos != -1) {
+                        if (itemClickListener != null) {
+                            itemClickListener.onItemClick(v, pos);
+                        }
+                    }
+                }
+            });
         }
 
         void onBind(List_FriendItem item){
