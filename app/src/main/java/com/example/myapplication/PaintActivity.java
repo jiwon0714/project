@@ -66,12 +66,31 @@ public class PaintActivity extends AppCompatActivity {
         setContentView(R.layout.activity_paint);
         myView = new MyPaintView(this);
 
+        imagePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Uri selectedImageUri = data.getData();
+                        try {
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                            myView.setBackgroundImage(bitmap);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Log.e("Image Selection Error", "Error: " + e.getMessage());
+                        }
+                    }
+                }
+        );
+
         // "갤러리로 이동" 버튼 처리
         ImageButton btnGallery = findViewById(R.id.btnGallery);
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGallery();
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                imagePickerLauncher.launch(intent);
             }
         });
 
@@ -90,28 +109,7 @@ public class PaintActivity extends AppCompatActivity {
 
         ((LinearLayout) findViewById(R.id.paintLayout)).addView(myView);
 
-        imagePickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
-                        Uri selectedImageUri = data.getData();
-                        try {
-                            // Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri));
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
 
-                            int viewWidth = myView.getWidth();  // myView의 너비
-                            int viewHeight = myView.getHeight();  // myView의 높이
-                            Bitmap scaledImage = Bitmap.createScaledBitmap(bitmap, viewWidth, viewHeight, false);
-                            myView.setBackgroundImage(scaledImage);
-                            Toast.makeText(this, "배경 이미지로 설정되었습니다.", Toast.LENGTH_SHORT).show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            Log.e("Image Selection Error", "Error: " + e.getMessage());
-                        }
-                    }
-                }
-        );
 
 
         ((ImageButton)findViewById(R.id.btnClear)).setOnClickListener(new View.OnClickListener() {
@@ -239,8 +237,7 @@ public class PaintActivity extends AppCompatActivity {
         myView.mPaint.setColor(Color.WHITE); // 여기에서는 흰색을 배경색으로 사용
         myView.mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 
-        btnThickness.setImageResource(R.drawable.brush);
-        btnEraser.setImageResource(R.drawable.eraser_toggle);
+
 
     }
 
@@ -250,8 +247,6 @@ public class PaintActivity extends AppCompatActivity {
         myView.mPaint.setColor(selectedColor);
         myView.mPaint.setXfermode(null);
 
-        btnThickness.setImageResource(R.drawable.brush_toggle);
-        btnEraser.setImageResource(R.drawable.eraser);
 
     }
 
@@ -293,12 +288,6 @@ public class PaintActivity extends AppCompatActivity {
             enableDrawMode();
         // 다이얼로그 표시
         builder.show();
-    }
-
-    private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        imagePickerLauncher.launch(intent);
     }
 
     private void captureAndSaveImage() {
