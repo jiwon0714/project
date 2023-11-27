@@ -84,7 +84,6 @@ public class SnsListActivity extends AppCompatActivity {
 
         /* initiate recyclerview */
         mRecyclerView.setAdapter(mRecyclerAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,false));
 
         /* data request */
@@ -97,17 +96,20 @@ public class SnsListActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     List<ImageDTO> imageList = response.body();
                     for (ImageDTO post : imageList) {
-                        Bitmap mainImg = base64ToBitmap(post.getImg());
-                        Bitmap profileImg = base64ToBitmap(post.getProfileImg());
-
-                        mSnsItems.add(new SnsItem(profileImg, post.getOwner(), mainImg, post.getTxt(),"방금전"));
+                        try {
+                            Bitmap mainImg = base64ToBitmap(post.getImg());
+                            Bitmap profileImg = base64ToBitmap(post.getProfileImg());
+                            mSnsItems.add(new SnsItem(profileImg, post.getOwner(), mainImg, post.getTxt(),"방금전"));
+                        }
+                        catch (NullPointerException n) {
+                        }
                     }
                     Collections.reverse(mSnsItems);
+                    /* adapt data */
+                    mRecyclerAdapter.setSnsList(mSnsItems);
                 } else {
                     System.out.println("Error");
                 }
-                /* adapt data */
-                mRecyclerAdapter.setSnsList(mSnsItems);
             }
 
             @Override
