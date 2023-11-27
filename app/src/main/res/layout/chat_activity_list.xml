@@ -96,18 +96,6 @@
         android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
-
-
-        <ImageButton
-            android:id="@+id/btn_sns"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="70dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:background="#00FFFFFF"
-            app:srcCompat="@drawable/posting" />
-
         <ImageButton
             android:id="@+id/btn_paint"
             android:layout_width="70dp"
@@ -117,6 +105,16 @@
             android:scaleType="centerInside"
             android:background="#00FFFFFF"
             app:srcCompat="@drawable/icon_paint" />
+
+        <ImageButton
+            android:id="@+id/btn_chat"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:background="#00FFFFFF"
+            android:layout_marginRight="70dp"
+            app:srcCompat="@drawable/message" />
 
         <ImageButton
             android:id="@+id/btn_home"
@@ -129,14 +127,14 @@
             app:srcCompat="@drawable/icon_home" />
 
         <ImageButton
-            android:id="@+id/btn_chat"
+            android:id="@+id/btn_sns"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginRight="70dp"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
             android:background="#00FFFFFF"
-            android:layout_marginRight="70dp"
-            app:srcCompat="@drawable/message" />
+            app:srcCompat="@drawable/posting" />
 
         <ImageButton
             android:id="@+id/btn_diary"

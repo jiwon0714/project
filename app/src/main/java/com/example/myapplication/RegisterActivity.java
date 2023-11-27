@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                 UserDTO userDTO = new UserDTO(id.getText().toString(), name.getText().toString(), email.getText().toString(), pw.getText().toString());
                 // cmd-ipconfig ipv4 주소로 바꾸기
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.0.11:8080/demo/")
+                        .baseUrl("http://172.20.10.6:8080/demo/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api = retrofit.create(Api.class);
