@@ -64,6 +64,8 @@ public class PaintActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paint);
+
+
         myView = new MyPaintView(this);
 
         imagePickerLauncher = registerForActivityResult(
@@ -74,7 +76,13 @@ public class PaintActivity extends AppCompatActivity {
                         Uri selectedImageUri = data.getData();
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
-                            myView.setBackgroundImage(bitmap);
+
+                            int viewWidth = myView.getWidth();  // myView의 너비
+                            int viewHeight = myView.getHeight();  // myView의 높이
+                            // 이미지를 myView의 크기에 맞게 조절
+                            Bitmap scaledImage = Bitmap.createScaledBitmap(bitmap, viewWidth, viewHeight, false);
+
+                            myView.setBackgroundImage(scaledImage);
                         } catch (IOException e) {
                             e.printStackTrace();
                             Log.e("Image Selection Error", "Error: " + e.getMessage());
@@ -94,19 +102,8 @@ public class PaintActivity extends AppCompatActivity {
             }
         });
 
-        int uiOptions = getWindow().getDecorView().getSystemUiVisibility();
-        int newUiOptions = uiOptions;
-        boolean isImmersiveModeEnabled = ((uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) == uiOptions);
-        if (isImmersiveModeEnabled) {
-            Log.i("Is on?", "Turning immersive mode mode off. ");
-        } else {
-            Log.i("Is on?", "Turning immersive mode mode on.");
-        }
-        newUiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        newUiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
-        newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
 
+//
         ((LinearLayout) findViewById(R.id.paintLayout)).addView(myView);
 
 
@@ -235,9 +232,6 @@ public class PaintActivity extends AppCompatActivity {
     private void enableEraserMode() {
         // 지우개 모드로 설정 (선 색상을 배경색 또는 원하는 색으로 설정)
         myView.mPaint.setColor(Color.WHITE); // 여기에서는 흰색을 배경색으로 사용
-        myView.mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-
-
 
     }
 
@@ -245,7 +239,7 @@ public class PaintActivity extends AppCompatActivity {
     private void enableDrawMode() {
         // 그리기 모드로 설정 (선 색상을 원하는 색상으로 설정)
         myView.mPaint.setColor(selectedColor);
-        myView.mPaint.setXfermode(null);
+//        myView.mPaint.setXfermode(null);
 
 
     }
