@@ -151,7 +151,7 @@
             android:layout_height="56dp"
             android:layout_marginTop="4dp"
             android:layout_marginRight="4dp"
-            android:background="#CCCCCC"
+            android:background="#00FFFFFF"
             android:scaleType="fitCenter"
             android:src="@drawable/add"/>
 
