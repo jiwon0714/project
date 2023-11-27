@@ -9,6 +9,8 @@
         android:id="@+id/a1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+
         android:layout_alignParentTop="true"
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
@@ -57,7 +59,7 @@
             android:imeOptions="actionSend"
             android:inputType="textMultiLine"
             android:fontFamily="@font/soyo_maple"
-            android:textColor="#FF9800"
+            android:textColor="@color/black"
             android:textSize="30dp" />
 
         <androidx.appcompat.widget.AppCompatButton

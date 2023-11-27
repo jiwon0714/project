@@ -36,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jiwon"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="20dp"/>
 
@@ -43,6 +44,8 @@
             android:id="@+id/comment_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+
             android:text="10분"
             android:layout_marginLeft="10dp"
             android:textSize="20dp"/>
@@ -54,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/idbar"
+        android:textColor="@color/black"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/profile"
         android:layout_toLeftOf="@id/heartbar"
