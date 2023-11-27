@@ -1,32 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="241dp"
-        android:layout_height="231dp"
-        android:src="@drawable/pinokio_login"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/pinokio_login"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/soyo_maple"
+            android:text="피노키오"
+            android:textColor="#FF9800"
+            android:textSize="100sp" />
+
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/et_id"
-        android:layout_width="432dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="336dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="450dp"
+        android:layout_height="110dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
         android:background="@drawable/border"
         android:ems="10"
         android:fontFamily="@font/soyo_maple"
@@ -34,38 +50,30 @@
         android:textSize="30sp"
         android:inputType="textPersonName"
         android:minWidth="48dp"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/et_pass"
-        android:layout_width="434dp"
-        android:layout_height="82dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="450dp"
+        android:layout_height="110dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
         android:background="@drawable/border"
         android:fontFamily="@font/soyo_maple"
         android:ems="10"
-
         android:hint=" 비밀번호"
         android:textSize="30sp"
         android:inputType="text"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_id" />
+        />
 
     <android.widget.Button
         android:id="@+id/btn_login"
-        android:layout_width="429dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="112dp"
+        android:layout_width="450dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
         android:background="@drawable/border2"
         android:backgroundTintMode="add"
         android:fontFamily="@font/soyo_maple"
@@ -73,43 +81,22 @@
         android:textSize="30sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/et_pass"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/et_pass"
-        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+         />
 
     <android.widget.Button
         android:id="@+id/btn_register"
-        android:layout_width="430dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="450dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+
         android:background="@drawable/border2"
         android:fontFamily="@font/soyo_maple"
         android:text="회원가입"
         android:textSize="30sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/btn_login"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+         />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/soyo_maple"
-        android:text="피노키오"
-        android:textColor="#FF9800"
-        android:textSize="100sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.667"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
