@@ -99,7 +99,7 @@ public class SnsListActivity extends AppCompatActivity {
                     List<ImageDTO> imageList = response.body();
                     for (ImageDTO post : imageList) {
                         Bitmap bitmap = base64ToBitmap(post.getImg());
-                        mSnsItems.add(new SnsItem(bitmap, post.getOwner(), bitmap, post.getTxt(),"댓글", "댓글"));
+                        mSnsItems.add(new SnsItem(bitmap, post.getOwner(), bitmap, post.getTxt()));
                     }
 
                 } else {

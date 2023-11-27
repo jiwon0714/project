@@ -215,7 +215,7 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
             super(itemView);
 
             comment_name = (TextView) itemView.findViewById(R.id.comment_name);
-            comment = (TextView) itemView.findViewById(R.id.comment);
+//            comment = (TextView) itemView.findViewById(R.id.comment);
             main_image = (ImageView) itemView.findViewById(R.id.main_image);
             chat_to_comment = (ImageView) itemView.findViewById(R.id.chat);
             heart = (ImageView) itemView.findViewById(R.id.heart);
@@ -235,8 +235,8 @@ public class SnsRecyclerAdapter extends RecyclerView.Adapter<SnsRecyclerAdapter.
 
             name.setText(item.getName());
             text.setText(item.getText());
-            comment.setText(item.getComment());
-            comment_name.setText(item.getComment_name());
+//            comment.setText(item.getComment());
+//            comment_name.setText(item.getComment_name());
         }
     }
 }
