@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -48,7 +50,7 @@ import java.util.Locale;
 
 public class PaintActivity extends AppCompatActivity {
     private MyPaintView myView;
-
+    private ActivityResultLauncher<Intent> imagePickerLauncher;
     private int selectedColor; // 전역 변수로 선언
 
     ImageButton palette, btnThickness, btnEraser;
@@ -88,7 +90,28 @@ public class PaintActivity extends AppCompatActivity {
 
         ((LinearLayout) findViewById(R.id.paintLayout)).addView(myView);
 
+        imagePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        Uri selectedImageUri = data.getData();
+                        try {
+                            // Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImageUri));
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
 
+                            int viewWidth = myView.getWidth();  // myView의 너비
+                            int viewHeight = myView.getHeight();  // myView의 높이
+                            Bitmap scaledImage = Bitmap.createScaledBitmap(bitmap, viewWidth, viewHeight, false);
+                            myView.setBackgroundImage(scaledImage);
+                            Toast.makeText(this, "배경 이미지로 설정되었습니다.", Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Log.e("Image Selection Error", "Error: " + e.getMessage());
+                        }
+                    }
+                }
+        );
 
 
         ((ImageButton)findViewById(R.id.btnClear)).setOnClickListener(new View.OnClickListener() {
@@ -273,38 +296,10 @@ public class PaintActivity extends AppCompatActivity {
     }
 
     private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, REQUEST_IMAGE_PICK);
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        imagePickerLauncher.launch(intent);
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
-            if (data != null) {
-                Uri selectedImage = data.getData();
-
-                try {
-                    Bitmap backgroundImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-
-                    int viewWidth = myView.getWidth();  // myView의 너비
-                    int viewHeight = myView.getHeight();  // myView의 높이
-
-                    // 이미지를 myView의 크기에 맞게 조절
-                    Bitmap scaledImage = Bitmap.createScaledBitmap(backgroundImage, viewWidth, viewHeight, false);
-
-                    myView.setBackgroundImage(scaledImage);
-                    Toast.makeText(this, "배경 이미지로 설정되었습니다.", Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-
-
 
     private void captureAndSaveImage() {
         myView.setDrawingCacheEnabled(true);
