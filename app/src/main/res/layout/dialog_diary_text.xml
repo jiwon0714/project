@@ -65,6 +65,7 @@
                 android:layout_below="@+id/bar"
                 android:text="dddddddd"
                 android:textSize="35dp"
+                android:textColor="@color/black"
                 android:gravity="top|start"
                 android:inputType="textMultiLine"
                 android:layout_gravity="start"/>
